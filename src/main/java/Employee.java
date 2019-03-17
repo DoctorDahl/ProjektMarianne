@@ -22,6 +22,11 @@ public abstract class Employee {
         this.numWorkHours = numWorkHours;
     };
 
+
+    /************************************
+     *      Accessors and Mutators      *
+     ************************************/
+
     public int getIdNo() { return idNo; }
 
     public int getClearanceLvl() { return clearanceLvl; }

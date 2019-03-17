@@ -8,12 +8,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Path path = Paths.get("src/main/resources/children.csv");
+        Path pathIn = Paths.get("src/main/resources/children.csv");
+        //Path pathOut = Paths.get("src/main/resources/test2.csv");
         CSV_Handler csv_Handler = new CSV_Handler();
-        List<String[]> values;
+        List<String[]> values = null;
 
         try {
-            values = csv_Handler.readCSV(path);
+            values = csv_Handler.readCSV(pathIn);
 
             for(String[] arr : values) {
                 System.out.println(Arrays.toString(arr));
@@ -22,7 +23,13 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+/*
+        try{
+            csv_Handler.writeCSV(values, pathOut);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
     }
 
 }

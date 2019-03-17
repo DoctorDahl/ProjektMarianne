@@ -14,8 +14,8 @@ public class CSV_Handler {
     public List<String[]> readCSV(Path path) throws IOException {
 
         Reader reader = Files.newBufferedReader(path);
-        CSVReader csvReader = new CSVReader(reader); //Without header lines
-        //CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build(); //With header lines
+        CSVReader csvReader = new CSVReader(reader);
+        //CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build(); //With header line. Might be useful...
 
         List<String[]> values = csvReader.readAll();
 
