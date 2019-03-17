@@ -10,7 +10,7 @@ public class Child {
     public Child(String[] childInfo) throws Exception {
 
         if(childInfo.length != 11) {
-            throw new Exception("Wrong format for childInfo");
+            throw new IllegalArgumentException("String array childInfo must be of length 11.");
         }
 
         this.socialSecNo = childInfo[0];
