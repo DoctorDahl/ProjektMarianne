@@ -4,7 +4,7 @@ public abstract class Employee {
     protected static final int MANAGER = 1;
     protected static final float FULLTIMEHOURS = (float) 37.5;
 
-    private final int idNo;
+    private final String idNo;
     private int clearanceLvl; //'0' for normal staff - '1' for Manager
     private String f_name;
     private String l_name;
@@ -12,7 +12,7 @@ public abstract class Employee {
     private String address;
     private float numWorkHours;
 
-    protected Employee(int idNo, int clearanceLvl, String f_name, String l_name, String phoneNo, String address, float numWorkHours){
+    protected Employee(String idNo, int clearanceLvl, String f_name, String l_name, String phoneNo, String address, float numWorkHours){
         this.idNo = idNo;
         this.clearanceLvl = clearanceLvl;
         this.f_name = f_name;
@@ -27,7 +27,7 @@ public abstract class Employee {
      *      Accessors and Mutators      *
      ************************************/
 
-    public int getIdNo() { return idNo; }
+    public String getIdNo() { return idNo; }
 
     public int getClearanceLvl() { return clearanceLvl; }
     public void setClearanceLvl(int clearanceLvl) { this.clearanceLvl = clearanceLvl; }
