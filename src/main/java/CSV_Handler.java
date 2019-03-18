@@ -1,7 +1,5 @@
 import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
@@ -15,7 +13,6 @@ public class CSV_Handler {
 
         Reader reader = Files.newBufferedReader(path);
         CSVReader csvReader = new CSVReader(reader);
-        //CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build(); //With header line. Might be useful...
 
         List<String[]> values = csvReader.readAll();
 

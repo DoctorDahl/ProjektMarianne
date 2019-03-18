@@ -1,6 +1,3 @@
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +11,7 @@ public class Roster {
         this(week, week);
     }
 
-    public Roster(int startWeek, int endWeek) {
+    public Roster(int startWeek, int endWeek) { //TODO Husk ugenr øverst.
         csv_Handler = new CSV_Handler();
         roster = new ArrayList<String[]>();
         for(int i = 0; i < 5; i++)
@@ -23,14 +20,12 @@ public class Roster {
         this.endWeek = endWeek;
     }
 
+    public Roster(List<String[]> roster) {
+        this.roster = roster;
+        this.startWeek = Integer.parseInt(roster.get(0)[0]);
+    }
 
-    public void toCSV() throws IOException {
-
-        Path path;
-        for(int weekNo = startWeek; weekNo <= endWeek; weekNo++) {
-            path = Paths.get("src/main/resources/RosterWeek" + weekNo + ".csv");
-            csv_Handler.writeCSV(roster, path);
-        }
-
+    public List<String[]> getRoster() {
+        return roster;
     }
 }

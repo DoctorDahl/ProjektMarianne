@@ -27,6 +27,23 @@ public class Child {
 
     }
 
+    public String[] getAllInfo() {
+        String[] childInfo = new String[11];
+        childInfo[0] = socialSecNo;
+        childInfo[1] = f_name;
+        childInfo[2] = l_name;
+        childInfo[3] = specialConditions;
+        childInfo[4] = address;
+        childInfo[5] = parent1Name;
+        childInfo[6] = parent1Phone;
+        childInfo[7] = parent1Address;
+        childInfo[8] = parent2Name;
+        childInfo[9] = parent2Phone;
+        childInfo[10] = parent2Address;
+
+        return childInfo;
+    }
+
 
     /************************************
      *      Accessors and Mutators      *
