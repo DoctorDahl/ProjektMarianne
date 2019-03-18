@@ -54,6 +54,14 @@ public class Roster {
         return rosterWeek;
     }
 
+    public String getShift(int weekNo, String day, String shift) {
+        int startingRow = 3*(weekNo-1)+1;
+        int column = DAY_TO_INT.get(day);
+        int row = SHIFT_TO_INT.get(shift);
+
+        return roster.get(startingRow+row)[column];
+    }
+
 
     public List<String[]> getRoster() { return roster; }
     public String getYear() { return year; }
