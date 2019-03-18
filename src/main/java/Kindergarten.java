@@ -49,19 +49,13 @@ public class Kindergarten {
     //removeLogin
 
 
-    /************************************
-     *      Accessors and Mutators      *
-     ************************************/
+    /***********************************
+     *            Accessors            *
+     ***********************************/
 
     public List<Child> getChildren() { return children; }
-    public void setChildren(List<Child> children) { this.children = children; }
-
     public List<Employee> getEmployees() { return employees; }
-    public void setEmployees(List<Employee> employees) { this.employees = employees; }
-
     public List<Roster> getRosters() { return rosters; }
-    public void setRosters(List<Roster> rosters) { this.rosters = rosters; }
-
     public Map<String, String> getLogins() { return logins; }
-    public void setLogins(Map<String, String> logins) { this.logins = logins; }
+
 }

@@ -1,10 +1,8 @@
 public abstract class Employee {
 
-    protected static final int STAFF = 0;
-    protected static final int MANAGER = 1;
     protected static final float FULLTIMEHOURS = 37.0f;
 
-    private int clearanceLvl; //'0' for normal staff - '1' for Manager
+    private String type;
     private final String idNo;
     private String f_name;
     private String l_name;
@@ -12,9 +10,11 @@ public abstract class Employee {
     private String address;
     private float numWorkHours;
 
-    protected Employee(int clearanceLvl, String idNo, String f_name, String l_name, String phoneNo, String address, float numWorkHours){
+    protected Employee(String type, String idNo, String f_name, String l_name, String phoneNo, String address, float numWorkHours){
+        //TODO - Why do we have subclasses? They serve zero purpose as of now.
+        //TODO - Maybe enum for EmployeeTypes?
         //TODO - Check for existing idNo, and throw Exception if found?
-        this.clearanceLvl = clearanceLvl;
+        this.type = type;
         this.idNo = idNo;
         this.f_name = f_name;
         this.l_name = l_name;
@@ -22,9 +22,6 @@ public abstract class Employee {
         this.address = address;
         this.numWorkHours = numWorkHours;
     };
-
-    protected abstract String getType();
-
 
     public String[] getAllInfo() {
         String[] employeeInfo = new String[6];
@@ -44,8 +41,8 @@ public abstract class Employee {
 
     public String getIdNo() { return idNo; }
 
-    public int getClearanceLvl() { return clearanceLvl; }
-    public void setClearanceLvl(int clearanceLvl) { this.clearanceLvl = clearanceLvl; }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
 
     public String getF_name() { return f_name; }
     public void setF_name(String f_name) { this.f_name = f_name; }
