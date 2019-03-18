@@ -1,8 +1,10 @@
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,11 +17,17 @@ public class Kindergarten {
     public static Map<String,String> logins;
 
     public Kindergarten() {
-        Kindergarten.csv_Handler = new CSV_Handler();
+        csv_Handler = new CSV_Handler();
+        children = new ArrayList<>();
+        employees = new ArrayList<>();
+        rosters = new ArrayList<>();
+        logins = new HashMap<>();
+
         try {
-            Kindergarten.loadAll();
+            loadAll();
         } catch (IOException e) {
             //TODO - Handle the caught exception.
+            e.printStackTrace();
         }
     }
 
@@ -37,40 +45,44 @@ public class Kindergarten {
 
     public static void loadChildren() throws IOException {
         Path path = Paths.get("src/main/resources/Børn.csv");
-        List<String[]> childArray = csv_Handler.readCSV(path);
 
-        for(String[] a : childArray) {
-            children.add(new Child(a));
+        if(Files.exists(path)) {
+            List<String[]> childArray = csv_Handler.readCSV(path);
+
+            for (String[] a : childArray) {
+                children.add(new Child(a));
+            }
         }
     }
 
     public static void loadEmployees() throws IOException {
 
         Path path = Paths.get("src/main/resources/Medarbejdere.csv");
-        List<String[]> employeeArray = csv_Handler.readCSV(path);
+        if(Files.exists(path)) {
+            List<String[]> employeeArray = csv_Handler.readCSV(path);
 
-        for(String[] a : employeeArray) {
-            Employee employee;
+            for (String[] a : employeeArray) {
+                Employee employee;
 
-            if (a[0].equals("Manager")) {
+                switch (a[0]) {
+                    case "Manager":
+                        employee = new Manager(a[0], a[1], a[2], a[3], a[4]);
+                        break;
 
-                employee = new Manager(a[0],a[1],a[2],a[3],a[4]);
+                    case "FullTimeEmployee":
+                        employee = new FullTimeEmployee(a[0], a[1], a[2], a[3], a[4]);
+                        break;
 
-            } else if (a[0].equals("FullTimeEmployee")){
+                    case "PartTimeEmployee":
+                        employee = new PartTimeEmployee(a[0], a[1], a[2], a[3], a[4], Float.parseFloat(a[5]));
+                        break;
 
-                employee = new FullTimeEmployee(a[0],a[1],a[2],a[3],a[4]);
+                    default:
+                        throw new IOException("Wrong format for Medarbejdere.csv");
+                }
 
-            } else if (a[0].equals("PartTimeEmployee")){
-
-                employee = new PartTimeEmployee(a[0],a[1],a[2],a[3],a[4],Float.parseFloat(a[5]));
-
-            } else {
-
-                throw new IOException("Wrong format for Medarbejdere.csv");
-
+                employees.add(employee);
             }
-
-            employees.add(employee);
         }
     }
 
@@ -87,10 +99,12 @@ public class Kindergarten {
 
     public static void loadLogins() throws IOException {
         Path path = Paths.get("src/main/resources/Logins.csv");
-        List<String[]> loginArray = csv_Handler.readCSV(path);
+        if(Files.exists(path)) {
+            List<String[]> loginArray = csv_Handler.readCSV(path);
 
-        for(String[] login : loginArray) {
-            logins.put(login[0],login[1]);
+            for (String[] login : loginArray) {
+                logins.put(login[0], login[1]);
+            }
         }
     }
 
@@ -106,22 +120,20 @@ public class Kindergarten {
     }
 
     public static void saveChildren() throws IOException {
-        Path path;
-        List<String[]> childArray = new ArrayList<String[]>();
+        Path path = Paths.get("src/main/resources/Børn.csv");
+        List<String[]> childArray = new ArrayList<>();
         for(Child child : children) {
             childArray.add(child.getAllInfo());
         }
-        path = Paths.get("src/main/resources/Børn.csv");
         csv_Handler.writeCSV(childArray, path);
     }
 
     public static void saveEmployees() throws IOException {
-        Path path;
-        List<String[]> employeeArray = new ArrayList<String[]>();
+        Path path = Paths.get("src/main/resources/Medarbejdere.csv");
+        List<String[]> employeeArray = new ArrayList<>();
         for(Employee employee : employees) {
             employeeArray.add(employee.getAllInfo());
         }
-        path = Paths.get("src/main/resources/Medarbejdere.csv");
         csv_Handler.writeCSV(employeeArray, path);
     }
 
@@ -131,13 +143,21 @@ public class Kindergarten {
 
         for(Roster roster : rosters) {
             rosterArray = roster.getRoster();
-            path = Paths.get("src/main/resources/Vagtplaner/Uge" + rosterArray.get(0)[0] + ".csv");
+            path = Paths.get("src/main/resources/Vagtplaner/År" + rosterArray.get(0)[0] + ".csv");
             csv_Handler.writeCSV(rosterArray, path);
         }
     }
 
     public static void saveLogins() throws IOException {
-        //TODO - Implement.
+
+        Path path = Paths.get("src/main/resources/Logins.csv");
+        List<String[]> loginArray = new ArrayList<>();
+
+        for(Map.Entry<String,String> entry : logins.entrySet()) {
+            String[] login = {entry.getKey(),entry.getValue()};
+            loginArray.add(login);
+        }
+        csv_Handler.writeCSV(loginArray, path);
     }
 
 }

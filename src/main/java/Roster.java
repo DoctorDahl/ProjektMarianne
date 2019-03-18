@@ -1,31 +1,60 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Roster {
 
     private List<String[]> roster;
-    private int startWeek, endWeek;
-    private CSV_Handler csv_Handler;
+    private String year;
+    private static final Map<String,Integer> DAY_TO_INT = new HashMap<>();
+    private static final Map<String,Integer> SHIFT_TO_INT = new HashMap<>();
 
-    public Roster(int week) {
-        this(week, week);
+    {
+        DAY_TO_INT.put("Monday",0);
+        DAY_TO_INT.put("Tuesday",1);
+        DAY_TO_INT.put("Wednesday",2);
+        DAY_TO_INT.put("Thursday",3);
+        DAY_TO_INT.put("Friday",4);
+
+        SHIFT_TO_INT.put("Early",0);
+        SHIFT_TO_INT.put("Late",1);
+        SHIFT_TO_INT.put("PartTime",2);
     }
 
-    public Roster(int startWeek, int endWeek) { //TODO Husk ugenr øverst.
-        csv_Handler = new CSV_Handler();
-        roster = new ArrayList<String[]>();
-        for(int i = 0; i < 5; i++)
+
+    public Roster(String year) {
+
+        roster = new ArrayList<>();
+        this.year = year;
+
+        //First row contains only the year;
+        roster.add(new String[] {""+year});
+
+        //Three rows for Early/Late shifts and and PartTimeEmployees
+        //52 times - once for each week in a year
+        for(int i = 0; i < (52*3); i++)
             roster.add(new String[5]);
-        this.startWeek = startWeek;
-        this.endWeek = endWeek;
+
     }
 
     public Roster(List<String[]> roster) {
         this.roster = roster;
-        this.startWeek = Integer.parseInt(roster.get(0)[0]);
     }
 
-    public List<String[]> getRoster() {
-        return roster;
+    public List<String[]> getWeek(int weekNo) {
+        List<String[]> rosterWeek = new ArrayList<>();
+
+        int startingRow = 3*(weekNo-1)+1;
+
+        rosterWeek.add(roster.get(startingRow));
+        rosterWeek.add(roster.get(startingRow+1));
+        rosterWeek.add(roster.get(startingRow+2));
+
+        return rosterWeek;
     }
+
+
+    public List<String[]> getRoster() { return roster; }
+    public String getYear() { return year; }
 }
