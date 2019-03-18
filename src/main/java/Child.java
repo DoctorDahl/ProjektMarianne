@@ -5,9 +5,9 @@ public class Child {
     private String specialConditions;
     private String parent1Name,parent2Name;
     private String parent1Phone, parent2Phone;
-    private Address address, parent1Address, parent2Address;
+    private String address, parent1Address, parent2Address;
 
-    public Child(String[] childInfo) throws Exception {
+    public Child(String[] childInfo) throws IllegalArgumentException {
 
         if(childInfo.length != 11) {
             throw new IllegalArgumentException("String array childInfo must be of length 11.");
@@ -17,13 +17,13 @@ public class Child {
         this.f_name = childInfo[1];
         this.l_name = childInfo[2];
         this.specialConditions = childInfo[3];
-        this.address = new Address(childInfo[4]);
+        this.address = childInfo[4];
         this.parent1Name = childInfo[5];
         this.parent1Phone = childInfo[6];
-        this.parent1Address = new Address(childInfo[7]);
+        this.parent1Address = childInfo[7];
         this.parent2Name = childInfo[8];
         this.parent2Phone = childInfo[9];
-        this.parent2Address = new Address(childInfo[10]);
+        this.parent2Address = childInfo[10];
 
     }
 
@@ -55,13 +55,13 @@ public class Child {
     public String getParent2Phone() { return parent2Phone; }
     public void setParent2Phone(String parent2Phone) { this.parent2Phone = parent2Phone; }
 
-    public Address getAddress() { return address; }
-    public void setAddress(Address address) { this.address = address; }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
 
-    public Address getParent1Address() { return parent1Address; }
-    public void setParent1Address(Address parent1Address) { this.parent1Address = parent1Address; }
+    public String getParent1Address() { return parent1Address; }
+    public void setParent1Address(String parent1Address) { this.parent1Address = parent1Address; }
 
-    public Address getParent2Address() { return parent2Address; }
-    public void setParent2Address(Address parent2Address) { this.parent2Address = parent2Address; }
+    public String getParent2Address() { return parent2Address; }
+    public void setParent2Address(String parent2Address) { this.parent2Address = parent2Address; }
 
 }

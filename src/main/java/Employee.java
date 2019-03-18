@@ -8,11 +8,11 @@ public abstract class Employee {
     private int clearanceLvl; //'0' for normal staff - '1' for Manager
     private String f_name;
     private String l_name;
-    private int phoneNo;
-    private Address address;
+    private String phoneNo;
+    private String address;
     private float numWorkHours;
 
-    protected Employee(int idNo, int clearanceLvl, String f_name, String l_name, int phoneNo, Address address, float numWorkHours){
+    protected Employee(int idNo, int clearanceLvl, String f_name, String l_name, String phoneNo, String address, float numWorkHours){
         this.idNo = idNo;
         this.clearanceLvl = clearanceLvl;
         this.f_name = f_name;
@@ -38,11 +38,11 @@ public abstract class Employee {
     public String getL_name() { return l_name; }
     public void setL_name(String l_name) { this.l_name = l_name; }
 
-    public int getPhoneNo() { return phoneNo; }
-    public void setPhoneNo(int phoneNo) { this.phoneNo = phoneNo; }
+    public String getPhoneNo() { return phoneNo; }
+    public void setPhoneNo(String phoneNo) { this.phoneNo = phoneNo; }
 
-    public Address getAddress() { return address; }
-    public void setAddress(Address address) { this.address = address; }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
 
     public float getNumWorkHours() { return numWorkHours; }
     public void setNumWorkHours(float numWorkHours) { this.numWorkHours = numWorkHours; }

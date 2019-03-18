@@ -1,2 +1,2 @@
 SSN,f_name,l_name,specialConditions,address,parent1fName,parent1lName,parent1Phone,parent1Address,parent2fName,parent2lName,parent2Phone,parent2Address
-1010101010,Alice,Jensen,"Alice er dødsens allergisk overfor e-numre, pesticider og gluten.","Lærkevej 4,2900,Hellerup",Solveig,Jensen,12341234,"Lærkevej 4,2900,Hellerup",Robert,Jensen,43214321,"Lærkevej 4,2900,Hellerup"
+1010101010,Alice,Jensen,"Alice er dødsens allergisk overfor e-numre, pesticider og gluten.","Lærkevej 4, 1.th, 2900 Hellerup",Solveig,Jensen,12341234,"Lærkevej 4, 1.th, 2900 Hellerup",Robert,Jensen,43214321,"Lærkevej 4, 1.th, 2900 Hellerup"
