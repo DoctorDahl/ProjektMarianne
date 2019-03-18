@@ -137,7 +137,6 @@ public class GUI {
                 case "2":
                     //result = almMarianneFlow();
                     break;
-
             }
         } while (!result.equals("Q"));
     }
