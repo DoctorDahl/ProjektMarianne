@@ -42,7 +42,7 @@ public class Roster {
         this.roster = roster;
     }
 
-    public List<String[]> getWeek(int weekNo) {
+    public List<String[]> getWeekRoster(int weekNo) {
         List<String[]> rosterWeek = new ArrayList<>();
 
         int startingRow = 3*(weekNo-1)+1;

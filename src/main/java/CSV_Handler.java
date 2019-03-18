@@ -104,14 +104,14 @@ public class CSV_Handler {
      *  Writing to CSV-formatted files  *
      ************************************/
 
-    public void saveAll(Kindergarten kindergarten) throws IOException {
-        saveChildren(kindergarten);
-        saveEmployees(kindergarten);
-        saveRosters(kindergarten);
-        saveLogins(kindergarten);
+    public void writeAll(Kindergarten kindergarten) throws IOException {
+        writeChildren(kindergarten);
+        writeEmployees(kindergarten);
+        writeRosters(kindergarten);
+        writeLogins(kindergarten);
     }
 
-    public void saveChildren(Kindergarten kindergarten) throws IOException {
+    public void writeChildren(Kindergarten kindergarten) throws IOException {
         Path path = Paths.get("src/main/resources/Børn.csv");
         List<String[]> childArray = new ArrayList<>();
         for(Child child : kindergarten.getChildren()) {
@@ -120,7 +120,7 @@ public class CSV_Handler {
         writeCSV(childArray, path);
     }
 
-    public void saveEmployees(Kindergarten kindergarten) throws IOException {
+    public void writeEmployees(Kindergarten kindergarten) throws IOException {
         Path path = Paths.get("src/main/resources/Medarbejdere.csv");
         List<String[]> employeeArray = new ArrayList<>();
         for(Employee employee : kindergarten.getEmployees()) {
@@ -129,7 +129,7 @@ public class CSV_Handler {
         writeCSV(employeeArray, path);
     }
 
-    public void saveRosters(Kindergarten kindergarten) throws IOException {
+    public void writeRosters(Kindergarten kindergarten) throws IOException {
         Path path;
         List<String[]> rosterArray;
         for(Roster roster : kindergarten.getRosters()) {
@@ -139,7 +139,7 @@ public class CSV_Handler {
         }
     }
 
-    public void saveLogins(Kindergarten kindergarten) throws IOException {
+    public void writeLogins(Kindergarten kindergarten) throws IOException {
         Path path = Paths.get("src/main/resources/Logins.csv");
         List<String[]> loginArray = new ArrayList<>();
 
