@@ -13,6 +13,7 @@ public abstract class Employee {
     private float numWorkHours;
 
     protected Employee(int clearanceLvl, String idNo, String f_name, String l_name, String phoneNo, String address, float numWorkHours){
+        //TODO - Check for existing idNo, and throw Exception if found?
         this.clearanceLvl = clearanceLvl;
         this.idNo = idNo;
         this.f_name = f_name;

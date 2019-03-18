@@ -10,18 +10,43 @@ public class Kindergarten {
     private List<Roster> rosters;
     private Map<String,String> logins;
 
-    public Kindergarten() {
+    public Kindergarten() throws IOException {
         csv_Handler = new CSV_Handler();
-        try {
-            this.children = csv_Handler.readChildren();
-            this.employees = csv_Handler.readEmployees();
-            this.rosters = csv_Handler.readRosters();
-            this.logins = csv_Handler.readLogins();
-        } catch (IOException e) {
-            //TODO - Handle the caught exception.
-            e.printStackTrace();
-        }
+        this.children = csv_Handler.readChildren();
+        this.employees = csv_Handler.readEmployees();
+        this.rosters = csv_Handler.readRosters();
+        this.logins = csv_Handler.readLogins();
     }
+
+    public void enrollChild(String[] childInfo) throws IOException {
+        Child child = new Child(childInfo);
+        children.add(child);
+        csv_Handler.writeChildren(this);
+    }
+
+    public void disenrollChild(String socialSecNo) throws IOException {
+        for(Child child : children) {
+            if(child.getSocialSecNo().equals(socialSecNo)) {
+                children.remove(child);
+                break;
+            }
+        }
+        csv_Handler.writeChildren(this);
+    }
+
+
+    //TODO - Implement the following methods
+
+    //addManager
+    //addFullTimeEmployee
+    //addPartTimeEmployee
+    //removeEmployee
+
+    //createNewRoster
+    //updateRoster
+
+    //createNewLogin
+    //removeLogin
 
 
     /************************************
