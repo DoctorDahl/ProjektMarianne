@@ -310,7 +310,6 @@ public class GUI {
             scanner.nextLine();
         }
 
-
         /*
         System.out.println("indtast følgende data: \n");
         System.out.println("Barnets cpr nr:");
