@@ -60,13 +60,13 @@ public class Roster {
         return roster.get(startingRow+row)[column];
     }
 
-    public void setShift(int weekNo, String day, String shift) {
+    public void setShift(int weekNo, String day, String shift, String value) {
         int startingRow = 3*(weekNo-1)+1;
         int column = DAY_TO_INT.get(day);
         int row = SHIFT_TO_INT.get(shift);
 
         String[] relevantRow = roster.get(startingRow+row);
-        relevantRow[column] = shift;
+        relevantRow[column] = value;
 
         roster.set(startingRow+row,relevantRow);
     }

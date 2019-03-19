@@ -56,6 +56,7 @@ public class Kindergarten {
     public void createNewRoster(String year) throws IOException {
         //TODO - Check if year exists?
         Roster roster = new Roster(year);
+        rosters.add(roster);
         csv_Handler.writeRosters(this);
     }
 
@@ -70,11 +71,16 @@ public class Kindergarten {
         csv_Handler.writeRosters(this);
     }
 
-    public void addValueRoster(String year, int weekNo, String day, String shift, String value) {
+    public void addValueRoster(String year, int weekNo, String day, String shift, String value) throws IOException{
         for(Roster roster : rosters) {
             if(roster.getYear().equals(year)) {
                 String currentShift = roster.getShift(weekNo, day, shift);
-                currentShift += ","+value;
+                if(currentShift == null) {
+                    roster.setShift(weekNo, day, shift, value);
+                } else {
+                    roster.setShift(weekNo, day, shift, currentShift + "," + value);
+                }
+                csv_Handler.writeRosters(this);
             }
         }
         //TODO - Roster doesn't exist
