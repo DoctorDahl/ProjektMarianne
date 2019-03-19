@@ -260,6 +260,12 @@ public class GUI {
         String screen = headerBlock
                 +fillLine("Tast \"1\" for at oprette en ny medarbejder.")
                 +fillLine("Tast \"2\" for at fjerne en vagtplan")
+                +fillLine("Tast \"3\" for at opdatere en vagtplan")
+                +fillLine("Tast \"4\" for at se vagtplan")
+                +fillLine()
+                +endLine
+                +bottom;
+        System.out.println(screen);
     }
 
     public void addChildDisplay() {
