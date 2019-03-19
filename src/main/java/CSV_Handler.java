@@ -104,6 +104,7 @@ public class CSV_Handler {
         for(Child child : kindergarten.getChildren()) {
             childArray.add(child.getAllInfo());
         }
+        Files.deleteIfExists(path);
         writeCSV(childArray, path);
     }
 
@@ -113,6 +114,7 @@ public class CSV_Handler {
         for(Employee employee : kindergarten.getEmployees()) {
             employeeArray.add(employee.getAllInfo());
         }
+        Files.deleteIfExists(path);
         writeCSV(employeeArray, path);
     }
 
@@ -122,6 +124,7 @@ public class CSV_Handler {
         for(Roster roster : kindergarten.getRosters()) {
             rosterArray = roster.getRoster();
             path = Paths.get("src/main/resources/Vagtplaner/År" + rosterArray.get(0)[0] + ".csv");
+            Files.deleteIfExists(path);
             writeCSV(rosterArray, path);
         }
     }
