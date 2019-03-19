@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GUI {
@@ -60,7 +61,7 @@ public class GUI {
         return header;
     }
 
-    public GUI(Kindergarten kindergarten, String kindergartenName) {
+    public GUI(Kindergarten kindergarten, String kindergartenName) throws IOException{
         this.kindergarten = kindergarten;
         this.headerBlock = generateHeader(kindergartenName);
         mainFlow();
@@ -109,7 +110,7 @@ public class GUI {
      *
      ******************************************************************************************************************/
 
-    private void mainFlow() {
+    private void mainFlow() throws IOException {
         String result;
         do{
             result = mainGUI();
@@ -154,7 +155,7 @@ public class GUI {
     }
 
     // TODO - implementer b - q - m
-    public  void managerAccessMenu() {
+    public  void managerAccessMenu() throws IOException {
         String screen = headerBlock
                 + fillLine("Tast \"1\" for at få tilgang til Børne menuen.")
                 + fillLine("Tast \"2\" for at få tilgang til medarbejder menuen.")
@@ -191,6 +192,8 @@ public class GUI {
     }
     // TODO - implementer b - q - m
     public void staffAccessMenu(){
+        String result = Main.keyInput.nextLine();
+        do{
         String screen = headerBlock
                 + fillLine("Tast \"1\" for at se en liste over alle børn.")
                 + fillLine("Tast \"2\" for at se en liste over alle medarbejdere.")
@@ -200,22 +203,23 @@ public class GUI {
                 + bottom;
         System.out.println(screen);
 
-        int choice = Main.keyInput.nextInt();
+        String choice = Main.keyInput.nextLine();
         switch (choice){
-            case 1:
-                System.out.println(kindergarten.getChildren()); // TODO - søg specifikt barn
+            case "1":
+                // TODO - søg specifikt barn
                 break;
-            case 2:
-                System.out.println(kindergarten.getEmployees()); // TODO - søg specifik medarbejder
+            case "2":
+                 // TODO - søg specifik medarbejder
                 break;
-            case 3: // TODO - se din vagtplan
+            case "3": // TODO - se din vagtplan
                 break;
                 default: switchDefault();
                     break;
         }
+        } while(!result.equalsIgnoreCase("q"));
     }
     // TODO - implementer b - q - m
-    public void childrenMenu(){
+    public void childrenMenu() {
         String screen = headerBlock
                 +fillLine("Tast \"1\" for at oprette et nyt barn.")
                 +fillLine("Tast \"2\" for at fjerne et barn.")
@@ -225,7 +229,7 @@ public class GUI {
         System.out.println(screen);
         int choice = Main.keyInput.nextInt();
         switch (choice){
-            case 1: // TODO - opret barn
+            case 1: addChildDisplay();
                 break;
             case 2: // TODO fjern barn
                 default: switchDefault();
@@ -234,7 +238,7 @@ public class GUI {
     }
 
     // TODO - implementer b - q - m
-    public void employeeMenu(){
+    public void employeeMenu() {
         String screen = headerBlock
                 +fillLine("Tast \"1\" for at oprette en ny medarbejder.")
                 +fillLine("Tast \"2\" for at fjerne en medarbejder. ")
@@ -244,7 +248,7 @@ public class GUI {
         System.out.println(screen);
         int choice = Main.keyInput.nextInt();
         switch (choice){
-            case 1: // TODO - opret medarbejder
+            case 1: addEmployeeDisplay();
                 break;
             case 2: // TODO fjern medarbejder
             default: switchDefault();
@@ -252,10 +256,11 @@ public class GUI {
         }
     }
 
-    public void addChild() throws IOException {
+    public void addChildDisplay() {
 
         System.out.println("indtast følgende data: \n");
         System.out.println("Barnets cpr nr:");
+        Main.keyInput.nextLine();
         String socialSecNo = Main.keyInput.nextLine();
         System.out.println("Barnets fornavn:");
         String firstName = Main.keyInput.nextLine();
@@ -278,12 +283,44 @@ public class GUI {
         System.out.println("Anden værges adresse: ");
         String parent2Address = Main.keyInput.nextLine();
 
-        kindergarten.enrollChild(new String[]{socialSecNo, firstName, lastName, specialConditions, address, parent1Name, parent1Phone,
-                parent1Address, parent2Name, parent2Phone, parent2Address});
-
+        try{
+        kindergarten.enrollChild(new String[]{
+                socialSecNo, firstName, lastName, specialConditions, address, parent1Name, parent1Phone,
+                parent1Address, parent2Name, parent2Phone, parent2Address
+        });
+            System.out.println( firstName + " er oprettet i systemet");
+        }catch(Exception e){
+            System.out.println("Failed adding child");
+            e.printStackTrace();
+        }
     }
-    public void addEmployee() throws IOException{
 
+    public void addEmployeeDisplay() {
+
+        System.out.println("Indtast følgende data: \n");
+        System.out.println("Medarbejderens rolle\n Tast 0 for Manager\n Tast 1 for pædagog");
+        String type = Main.keyInput.nextLine();
+        System.out.println("Medarbejderens ID nummber: ");
+        String idNo = Main.keyInput.nextLine();
+        System.out.println("Medarbejderen fornavn: ");
+        String f_name = Main.keyInput.nextLine();
+        System.out.println("Medarbejderen efternavn: ");
+        String l_name = Main.keyInput.nextLine();
+        System.out.println("Telefon nummer: ");
+        String phoneNo = Main.keyInput.nextLine();
+        System.out.println("Adresse: ");
+        String address = Main.keyInput.nextLine();
+        System.out.println("Medarbejderen ønsket antal ugentlige timer: ");
+        String numWorkHours = Main.keyInput.nextLine();
+        try{
+        kindergarten.addEmployee((new String[]{
+                type, f_name, l_name, phoneNo, address, numWorkHours
+        }));
+            System.out.println(f_name + " Er oprettet i systemet");
+        }catch(Exception e){
+            System.out.println("Failed adding Employee");
+            e.printStackTrace();
+        }
     }
 
     public void switchDefault(){
