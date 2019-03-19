@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class CSV_Handler {
 
-    public List<String[]> readCSV(Path path) throws IOException {
+    private List<String[]> readCSV(Path path) throws IOException {
         Reader reader = Files.newBufferedReader(path);
         CSVReader csvReader = new CSVReader(reader);
         List<String[]> values = csvReader.readAll();
@@ -23,7 +23,7 @@ public class CSV_Handler {
         return values;
     }
 
-    public void writeCSV(List<String[]> values, Path path) throws IOException {
+    private void writeCSV(List<String[]> values, Path path) throws IOException {
         CSVWriter csvWriter = new CSVWriter(new FileWriter(path.toString()));
         csvWriter.writeAll(values);
         csvWriter.close();

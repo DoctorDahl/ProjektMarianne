@@ -42,8 +42,55 @@ public class Kindergarten {
     //addPartTimeEmployee
     //removeEmployee
 
-    //createNewRoster
-    //updateRoster
+    public void createNewRoster(String year) throws IOException {
+        //TODO - Check if year exists?
+        Roster roster = new Roster(year);
+        csv_Handler.writeRosters(this);
+    }
+
+    public void addValueRoster(String year, int weekNo, String day, String shift, String value) {
+        for(Roster roster : rosters) {
+            if(roster.getYear().equals(year)) {
+                String currentShift = roster.getShift(weekNo, day, shift);
+                currentShift += ","+value;
+            } else {
+                //TODO - Roster doesn't exist
+            }
+        }
+    }
+
+    public void removeValueRoster(String year, int weekNo, String day, String shift, String value) {
+        for(Roster roster : rosters) {
+            if(roster.getYear().equals(year)) {
+                /*
+                String[] currentShift = roster.getShift(weekNo, day, shift);
+
+                for(String empID : currentShift) {
+                    if(empID.equals(value)) {
+                        ...
+                    }
+                }
+                */
+                String currentShift = roster.getShift(weekNo, day, shift);
+                if(currentShift.contains(","+value)) {
+                    currentShift.replace(","+value,"");
+                } else {
+                    currentShift.replace(value+",","");
+                }
+
+            } else {
+                //TODO - Roster doesn't exist
+            }
+        }
+    }
+
+    public void updateRoster(String year) throws IOException {
+        for(Roster roster : rosters) {
+            if(roster.getYear().equals(year)) {
+
+            }
+        }
+    }
 
     //createNewLogin
     //removeLogin

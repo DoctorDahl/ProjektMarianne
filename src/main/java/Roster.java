@@ -59,7 +59,19 @@ public class Roster {
         int column = DAY_TO_INT.get(day);
         int row = SHIFT_TO_INT.get(shift);
 
-        return roster.get(startingRow+row)[column];
+        String shiftString = roster.get(startingRow+row)[column];
+        return shiftString;//.split(",");
+    }
+
+    public void setShift(int weekNo, String day, String shift) {
+        int startingRow = 3*(weekNo-1)+1;
+        int column = DAY_TO_INT.get(day);
+        int row = SHIFT_TO_INT.get(shift);
+
+        String[] relevantRow = roster.get(startingRow+row);
+        relevantRow[column] = shift;
+
+        roster.set(startingRow+row,relevantRow);
     }
 
 

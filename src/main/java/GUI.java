@@ -72,7 +72,7 @@ public class GUI {
      * @return true if string is "M" or "Q"
      */
     private static boolean isMQ(String string) {
-        switch (string) {
+        switch (string.toUpperCase()) {
             case "M":
             case "Q":
                 return true;
@@ -87,7 +87,7 @@ public class GUI {
      * @return true is string is "B", "M" or "Q"
      */
     private static boolean isBMQ(String string) {
-        switch (string) {
+        switch (string.toUpperCase()) {
             case "B":
             case "M":
             case "Q":
@@ -96,23 +96,6 @@ public class GUI {
         return false;
     }
 
-    /**
-     * Transform lowercase "b", "m" and "q" to uppercase
-     *
-     * @param result the string to transform
-     * @return "B", "M" or "Q" if input is "b", "m" or "q", otherwise the original string is returned
-     */
-    private static String cleanBMQ(String result) {
-        switch (result) {
-            case "b":
-                return "B";
-            case "m":
-                return "M";
-            case "q":
-                return "Q";
-        }
-        return result;
-    }
 
 
     /******************************************************************************************************************
