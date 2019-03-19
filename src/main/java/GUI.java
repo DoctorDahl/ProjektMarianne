@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class GUI {
@@ -251,7 +252,7 @@ public class GUI {
         }
     }
 
-    public void addChild(){
+    public void addChild() throws IOException {
 
         System.out.println("indtast følgende data: \n");
         System.out.println("Barnets cpr nr:");
@@ -277,6 +278,11 @@ public class GUI {
         System.out.println("Anden værges adresse: ");
         String parent2Address = Main.keyInput.nextLine();
 
+        kindergarten.enrollChild(new String[]{socialSecNo, firstName, lastName, specialConditions, address, parent1Name, parent1Phone,
+                parent1Address, parent2Name, parent2Phone, parent2Address});
+
+    }
+    public void addEmployee() throws IOException{
 
     }
 
