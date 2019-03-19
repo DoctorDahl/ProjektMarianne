@@ -181,10 +181,12 @@ public class GUI {
                 // TODO - rostermenu
                 break;
             case "4":
-                getAllChildren(); // -  søg specifikt barn
+                getAllChildren();
+                // -  søg specifikt barn
                 break;
-            case 5:
-                getAllEmployees();// TODO -  søg specifik medarbejder
+            case "5":
+                getAllEmployees();
+                // TODO -  søg specifik medarbejder
                 break;
             case "6":
                 // TODO - se vagtplan
@@ -336,71 +338,53 @@ public class GUI {
             scanner.nextLine();
         }
 
-        /*
-        System.out.println("indtast følgende data: \n");
-        System.out.println("Barnets cpr nr:");
-        //Main.keyInput.nextLine(); <-- Den er nu håndteret i childrenMenu()
-        String socialSecNo = Main.keyInput.nextLine();
-        System.out.println("Barnets fornavn:");
-        String firstName = Main.keyInput.nextLine();
-        System.out.println("Barnets efternavn:");
-        String lastName = Main.keyInput.nextLine();
-        System.out.println("Barnets specielle behov:");
-        String specialConditions = Main.keyInput.nextLine();
-        System.out.println("Barnets addresse: ");
-        String address = Main.keyInput.nextLine();
-        System.out.println("Første værges navn:");
-        String parent1Name = Main.keyInput.nextLine();
-        System.out.println("Første værges telefon nr:");
-        String parent1Phone = Main.keyInput.nextLine();
-        System.out.println("Første værges adresse:");
-        String parent1Address = Main.keyInput.nextLine();
-        System.out.println("Anden værges navn:");
-        String parent2Name = Main.keyInput.nextLine();
-        System.out.println("Anden værges telefon nr: ");
-        String parent2Phone = Main.keyInput.nextLine();
-        System.out.println("Anden værges adresse:");
-        String parent2Address = Main.keyInput.nextLine();
-
-        try{
-        kindergarten.enrollChild(new String[]{
-                socialSecNo, firstName, lastName, specialConditions, address, parent1Name, parent1Phone,
-                parent1Address, parent2Name, parent2Phone, parent2Address
-        });
-            System.out.println( firstName + " er oprettet i systemet");
-        }catch(Exception e){
-            System.out.println("Failed adding child");
-            e.printStackTrace();
-        }
-        */
     }
 
     public void addEmployeeDisplay() {
 
-        System.out.println("Indtast følgende data: \n");
-        System.out.println("Medarbejderens rolle\n Manager eller partTimeEmployee ?");
-        //scanner.nextLine();
-        String type = scanner.nextLine();
-        System.out.println("Medarbejderens ID nummber: ");
-        String idNo = scanner.nextLine();
-        System.out.println("Medarbejderen fornavn: ");
-        String f_name = scanner.nextLine();
-        System.out.println("Medarbejderen efternavn: ");
-        String l_name = scanner.nextLine();
-        System.out.println("Telefon nummer: ");
-        String phoneNo = scanner.nextLine();
-        System.out.println("Adresse: ");
-        String address = scanner.nextLine();
+        String[] prompts = new String[]{
+                "Medarbejderens rolle: \"Manager\",\"FullTimeEmployee\" eller \"PartTimeEmployee\"",
+                "Medarbejderens ID nummer:",
+                "Medarbejderen fornavn:",
+                "Medarbejderen efternavn:",
+                "Telefon nummer:",
+                "Adresse:"
+        };
+        String[] employeeInfo = new String[7];
+
+        String screen;
+        for (int i = 0; i < employeeInfo.length-1; i++) {
+            screen = headerBlock
+                    + fillLine(prompts[i])
+                    + bottom;
+            System.out.println(screen);
+            employeeInfo[i] = scanner.nextLine();
+        }
+        if(employeeInfo[0].toUpperCase().equals("PARTTIMEEMPLOYEE")) {
+            screen = headerBlock
+                    + fillLine("Hvor mange timers abejdsuge?")
+                    +bottom;
+            System.out.println(screen);
+            employeeInfo[6] = scanner.nextLine();
+        } else {
+            employeeInfo = Arrays.copyOf(employeeInfo,6);
+        }
 
         try {
-            kindergarten.addEmployee((new String[]{
-                    type, f_name, l_name, phoneNo, address
-            }));
-            System.out.println(f_name + " Er oprettet i systemet");
-        } catch (Exception e) {
-            System.out.println("Failed adding Employee");
-            e.printStackTrace();
+            kindergarten.addEmployee(employeeInfo);
+            screen = headerBlock
+                    + fillLine(employeeInfo[2] + " er oprettet i systemet.")
+                    + bottom;
+            System.out.println(screen);
+            scanner.nextLine();
+        } catch (IOException e) {
+            screen = headerBlock
+                    + fillLine("Der opstod en fejl. Prøv igen.")
+                    + bottom;
+            System.out.println(screen);
+            scanner.nextLine();
         }
+
     }
 
     public void deleteChild() {
