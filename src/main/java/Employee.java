@@ -14,21 +14,20 @@ public class Employee {
 
         if(employeeInfo.length != 6 && employeeInfo.length != 7) {
             throw new IllegalArgumentException("String array employeeInfo must be of length 6 or 7.");
-        }
-
-        this.type = employeeInfo[0];
-        this.idNo = employeeInfo[1];
-        this.f_name = employeeInfo[2];
-        this.l_name = employeeInfo[3];
-        this.phoneNo = employeeInfo[4];
-        this.address = employeeInfo[5];
-
-        if(employeeInfo.length == 7) {
-            this.numWorkHours = Float.parseFloat(employeeInfo[6]);
         } else {
-            this.numWorkHours = FULLTIMEHOURS;
-        }
+            this.type = employeeInfo[0];
+            this.idNo = employeeInfo[1];
+            this.f_name = employeeInfo[2];
+            this.l_name = employeeInfo[3];
+            this.phoneNo = employeeInfo[4];
+            this.address = employeeInfo[5];
 
+            if (employeeInfo.length == 7) {
+                this.numWorkHours = Float.parseFloat(employeeInfo[6]);
+            } else {
+                this.numWorkHours = FULLTIMEHOURS;
+            }
+        }
     }
 
     public String[] getAllInfo() {

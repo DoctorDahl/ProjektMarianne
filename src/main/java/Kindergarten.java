@@ -68,7 +68,6 @@ public class Kindergarten {
             }
         }
         Files.deleteIfExists(Paths.get("src/main/resources/Vagtplaner/År"+ year +".csv"));
-        csv_Handler.writeRosters(this);
     }
 
     public void addValueRoster(String year, int weekNo, String day, String shift, String value) throws IOException{

@@ -11,20 +11,19 @@ public class Child {
 
         if(childInfo.length != 11) {
             throw new IllegalArgumentException("String array childInfo must be of length 11.");
+        } else {
+            this.socialSecNo = childInfo[0];
+            this.f_name = childInfo[1];
+            this.l_name = childInfo[2];
+            this.specialConditions = childInfo[3];
+            this.address = childInfo[4];
+            this.parent1Name = childInfo[5];
+            this.parent1Phone = childInfo[6];
+            this.parent1Address = childInfo[7];
+            this.parent2Name = childInfo[8];
+            this.parent2Phone = childInfo[9];
+            this.parent2Address = childInfo[10];
         }
-
-        this.socialSecNo = childInfo[0];
-        this.f_name = childInfo[1];
-        this.l_name = childInfo[2];
-        this.specialConditions = childInfo[3];
-        this.address = childInfo[4];
-        this.parent1Name = childInfo[5];
-        this.parent1Phone = childInfo[6];
-        this.parent1Address = childInfo[7];
-        this.parent2Name = childInfo[8];
-        this.parent2Phone = childInfo[9];
-        this.parent2Address = childInfo[10];
-
     }
 
     public String[] getAllInfo() {
