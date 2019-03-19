@@ -1,103 +1,99 @@
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class GUI {
 
-    Scanner scanner = new Scanner(System.in);
-    Kindergarten kindergarten;
+    private Scanner scanner = new Scanner(System.in);
+    private Kindergarten kindergarten;
 
-    static final int LINE_WIDTH = 76;
-    static final int PRE_WS = 4;
-    static final String spaces = "                                                                                                                                            ";
-    static final String line = "+-------------------------------------------------------------------------------------------------------------------------------------------";
+    private static final int LINE_WIDTH = 76;
+    private static final int PRE_WS = 4;
+    private static final String spaces = "                                                                                                                                            ";
+    private static final String line = "+-------------------------------------------------------------------------------------------------------------------------------------------";
 
-    public String headerBlock;
-    public static String backLine = fillLine()
+    private String headerBlock;
+    private static String backLine = fillLine()
             + fillLine("Tast \"B\" for at gå tilbage.");
 
-    public static String endLine = fillLine("Tast \"Q\" for at afslutte.");
+    private static String endLine = fillLine("Tast \"Q\" for at afslutte.");
 
-    public static String mainLine = fillLine("Tast \"M\" for at gå til  hovedmenu.");
+    private static String mainLine = fillLine("Tast \"M\" for at gå til  hovedmenu.");
 
-    public static String bottom = fillLine()
+    private static String bottom = fillLine()
             + fillLine("Godkend med \"Enter\"")
             + fillLine()
             + horisontalLine();
 
     public static String footerBlock = backLine + mainLine + endLine + bottom;
 
-    static String horisontalLine(int length) {
+    private static String horisontalLine(int length) {
         return line.substring(0, length - 1) + "+\n";
     }
 
-    static String horisontalLine() {
+    private static String horisontalLine() {
         return horisontalLine(LINE_WIDTH);
     }
 
-    static String fillLine(String string, int length, int preWS) {
+    private static String fillLine(String string, int length, int preWS) {
         return "|" + spaces.substring(0, preWS) + string + spaces.substring(0, length - (2 + preWS + string.length())) + "|\n";
     }
 
-    static String fillLine(int length) {
+    private static String fillLine(int length) {
         return "|" + spaces.substring(0, length - 2) + "|\n";
     }
 
-    static String fillLine() {
+    private static String fillLine() {
         return fillLine(LINE_WIDTH);
     }
 
-    static String fillLine(String string) {
+    private static String fillLine(String string) {
         return fillLine(string, LINE_WIDTH, PRE_WS);
     }
 
     private String generateHeader(String kindergartenName) {
-
-        String header = horisontalLine(LINE_WIDTH)
+        return horisontalLine(LINE_WIDTH)
                 + fillLine(kindergartenName, LINE_WIDTH, (LINE_WIDTH - kindergartenName.length()) / 2 - 1)
                 + horisontalLine(LINE_WIDTH)
                 + fillLine(LINE_WIDTH);
-
-        return header;
     }
 
-    public GUI(Kindergarten kindergarten, String kindergartenName) throws IOException {
+    public GUI(Kindergarten kindergarten, String kindergartenName) {
         this.kindergarten = kindergarten;
         this.headerBlock = generateHeader(kindergartenName);
         mainFlow();
     }
 
-    /**
-     * Examine if a string is "M" or "Q"
-     *
-     * @param string the string to examine
-     * @return true if string is "M" or "Q"
-     */
-    private static boolean isMQ(String string) {
-        switch (string.toUpperCase()) {
-            case "M":
-            case "Q":
-                return true;
-        }
-        return false;
-    }
-
-    /**
-     * Examine if a string is "B", "M" or "Q"
-     *
-     * @param string the string to examine
-     * @return true is string is "B", "M" or "Q"
-     */
-    private static boolean isBMQ(String string) {
-        switch (string.toUpperCase()) {
-            case "B":
-            case "M":
-            case "Q":
-                return true;
-        }
-        return false;
-    }
+//    /**
+//     * Examine if a string is "M" or "Q"
+//     *
+//     * @param string the string to examine
+//     * @return true if string is "M" or "Q"
+//     */
+//    private static boolean isMQ(String string) {
+//        switch (string.toUpperCase()) {
+//            case "M":
+//            case "Q":
+//                return true;
+//        }
+//        return false;
+//    }
+//
+//    /**
+//     * Examine if a string is "B", "M" or "Q"
+//     *
+//     * @param string the string to examine
+//     * @return true is string is "B", "M" or "Q"
+//     */
+//    private static boolean isBMQ(String string) {
+//        switch (string.toUpperCase()) {
+//            case "B":
+//            case "M":
+//            case "Q":
+//                return true;
+//        }
+//        return false;
+//    }
 
 
     /******************************************************************************************************************
@@ -110,7 +106,7 @@ public class GUI {
      *
      ******************************************************************************************************************/
 
-    private void mainFlow() throws IOException {
+    private void mainFlow() {
         String result;
         do {
             result = mainGUI();
@@ -155,7 +151,7 @@ public class GUI {
     }
 
     // TODO - implementer b - q - m
-    public void managerAccessMenu() throws IOException {
+    private void managerAccessMenu() {
         String screen = headerBlock
                 + fillLine("Tast \"1\" for at få tilgang til Børne menuen.")
                 + fillLine("Tast \"2\" for at få tilgang til medarbejder menuen.")
@@ -199,7 +195,7 @@ public class GUI {
     }
 
     // TODO - implementer b - q - m
-    public void staffAccessMenu() throws IOException {
+    private void staffAccessMenu() {
 
         String screen = headerBlock
                 + fillLine("Tast \"1\" for at se en liste over alle børn.")
@@ -228,7 +224,7 @@ public class GUI {
     }
 
     // TODO - implementer b - q - m
-    public void childrenMenu() {
+    private void childrenMenu() {
         String screen = headerBlock
                 + fillLine("Tast \"1\" for at oprette et nyt barn.")
                 + fillLine("Tast \"2\" for at fjerne et barn.")
@@ -251,7 +247,7 @@ public class GUI {
     }
 
     // TODO - implementer b - q - m
-    public void employeeMenu() {
+    private void employeeMenu() {
         String screen = headerBlock
                 + fillLine("Tast \"1\" for at oprette en ny medarbejder.")
                 + fillLine("Tast \"2\" for at fjerne en medarbejder. ")
@@ -273,7 +269,7 @@ public class GUI {
         }
     }
 
-    public void rosterMenu() {
+    private void rosterMenu() {
         String screen = headerBlock
                 + fillLine("Tast \"1\" for at oprette en ny medarbejder.")
                 + fillLine("Tast \"2\" for at fjerne en vagtplan")
@@ -297,7 +293,7 @@ public class GUI {
         }
     }
 
-    public void addChildDisplay() {
+    private void addChildDisplay() {
 
         String[] prompts = new String[]{
                 "Barnets cpr nr:",
@@ -340,7 +336,7 @@ public class GUI {
 
     }
 
-    public void addEmployeeDisplay() {
+    private void addEmployeeDisplay() {
 
         String[] prompts = new String[]{
                 "Medarbejderens rolle: \"Manager\",\"FullTimeEmployee\" eller \"PartTimeEmployee\"",
@@ -387,33 +383,55 @@ public class GUI {
 
     }
 
-    public void deleteChild() {
-        System.out.println("Indtast CPR nr på ønsket barn: ");
-        //scanner.nextLine();
+    private void deleteChild() {
+        String screen = headerBlock
+                + fillLine("Indtast CPR nr på barn der ønskes fjernet:")
+                + bottom;
+        System.out.println(screen);
+
         String socialSecNo = scanner.nextLine();
         try {
+            //TODO - Check at barn eksisterer. (Ikke vigtigt)
             kindergarten.disenrollChild(socialSecNo);
-            System.out.println("barn fjernet");
-        } catch (Exception e) {
-            System.out.println("Failed deleting child");
-            e.printStackTrace();
+            screen = headerBlock
+                    + fillLine("Barn fjernet fra systemet.")
+                    + bottom;
+            System.out.println(screen);
+            scanner.nextLine();
+        } catch (IOException e) {
+            screen = headerBlock
+                    + fillLine("Der opstod en fejl. Prøv igen.")
+                    + bottom;
+            System.out.println(screen);
+            scanner.nextLine();
         }
     }
 
-    public void deleteEmployee() {
-        System.out.println("Indtast idNo på ønsket medarbejder: ");
-        //scanner.nextLine();
+    private void deleteEmployee() {
+        String screen = headerBlock
+                + fillLine("Indtast idNo på medarbejder der ønskes fjernet:")
+                + bottom;
+        System.out.println(screen);
+
         String idNo = scanner.nextLine();
         try {
+            //TODO - Check at medarbejder eksisterer. (Ikke vigtigt)
             kindergarten.removeEmployee(idNo);
-            System.out.println("Medarbejder fjernet");
-        } catch (Exception e) {
-            System.out.println("Failed deleting staff");
-            e.printStackTrace();
+            screen = headerBlock
+                    + fillLine("Medarbejder fjernet fra systemet.")
+                    + bottom;
+            System.out.println(screen);
+            scanner.nextLine();
+        } catch (IOException e) {
+            screen = headerBlock
+                    + fillLine("Der opstod en fejl. Prøv igen.")
+                    + bottom;
+            System.out.println(screen);
+            scanner.nextLine();
         }
     }
 
-    public void getAllChildren() {
+    private void getAllChildren() {
         String childInfo;
         for (Child child : kindergarten.getChildren()) {
             childInfo = child.getSocialSecNo() + ", " + child.getF_name() + " " + child.getL_name();
@@ -421,7 +439,7 @@ public class GUI {
         }
     }
 
-    public void getAllEmployees() {
+    private void getAllEmployees() {
         String employeeInfo;
         for (Employee employee : kindergarten.getEmployees()) {
             employeeInfo = employee.getIdNo() + ", " + employee.getF_name() + " " + employee.getL_name();
@@ -429,13 +447,12 @@ public class GUI {
         }
     }
 
-    public void switchDefault() {
+    private void switchDefault() {
         scanner.nextLine(); // clear the wrong input before trying again
         System.out.println("Wrong input");
     }
-}
 
-/*
+    /*
     public void ChildrenSearch(){
 
          choice = sc. nextLine()
@@ -445,4 +462,5 @@ public class GUI {
         }
 
     }
+    */
 }
