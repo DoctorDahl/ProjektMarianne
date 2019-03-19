@@ -44,42 +44,42 @@ public class Main {
         String year = "2019";
         kindergarten.createNewRoster(year);
 
-        for (int i = 1; i < 53; i++) {
+        for (int weekNo = 1; weekNo < 53; weekNo++) {
 
-            kindergarten.addValueRoster(year, i, "Monday", "Early", "F1");
-            kindergarten.addValueRoster(year, i, "Monday", "Early", "F2");
-            kindergarten.addValueRoster(year, i, "Monday", "Late", "F3");
-            kindergarten.addValueRoster(year, i, "Monday", "Late", "F4");
-            kindergarten.addValueRoster(year, i, "Monday", "PartTime", "D1§10:00§12:30");
-            kindergarten.addValueRoster(year, i, "Monday", "PartTime", "D2§13:00§17:00");
+            kindergarten.addValueRoster(year, weekNo, "Monday", "Early", "F1");
+            kindergarten.addValueRoster(year, weekNo, "Monday", "Early", "F2");
+            kindergarten.addValueRoster(year, weekNo, "Monday", "Late", "F3");
+            kindergarten.addValueRoster(year, weekNo, "Monday", "Late", "F4");
+            kindergarten.addValueRoster(year, weekNo, "Monday", "PartTime", "D1§10:00§12:30");
+            kindergarten.addValueRoster(year, weekNo, "Monday", "PartTime", "D2§13:00§17:00");
 
-            kindergarten.addValueRoster(year, i, "Tuesday", "Early", "F1");
-            kindergarten.addValueRoster(year, i, "Tuesday", "Early", "F2");
-            kindergarten.addValueRoster(year, i, "Tuesday", "Late", "F3");
-            kindergarten.addValueRoster(year, i, "Tuesday", "Late", "F4");
-            kindergarten.addValueRoster(year, i, "Tuesday", "PartTime", "D1§10:00§12:30");
-            kindergarten.addValueRoster(year, i, "Tuesday", "PartTime", "D2§13:00§17:00");
+            kindergarten.addValueRoster(year, weekNo, "Tuesday", "Early", "F1");
+            kindergarten.addValueRoster(year, weekNo, "Tuesday", "Early", "F2");
+            kindergarten.addValueRoster(year, weekNo, "Tuesday", "Late", "F3");
+            kindergarten.addValueRoster(year, weekNo, "Tuesday", "Late", "F4");
+            kindergarten.addValueRoster(year, weekNo, "Tuesday", "PartTime", "D1§10:00§12:30");
+            kindergarten.addValueRoster(year, weekNo, "Tuesday", "PartTime", "D2§13:00§17:00");
 
-            kindergarten.addValueRoster(year, i, "Wednesday", "Early", "F3");
-            kindergarten.addValueRoster(year, i, "Wednesday", "Early", "F4");
-            kindergarten.addValueRoster(year, i, "Wednesday", "Late", "F5");
-            kindergarten.addValueRoster(year, i, "Wednesday", "Late", "F6");
-            kindergarten.addValueRoster(year, i, "Wednesday", "PartTime", "D3§10:00§12:30");
-            kindergarten.addValueRoster(year, i, "Wednesday", "PartTime", "D4§13:00§17:00");
+            kindergarten.addValueRoster(year, weekNo, "Wednesday", "Early", "F3");
+            kindergarten.addValueRoster(year, weekNo, "Wednesday", "Early", "F4");
+            kindergarten.addValueRoster(year, weekNo, "Wednesday", "Late", "F5");
+            kindergarten.addValueRoster(year, weekNo, "Wednesday", "Late", "F6");
+            kindergarten.addValueRoster(year, weekNo, "Wednesday", "PartTime", "D3§10:00§12:30");
+            kindergarten.addValueRoster(year, weekNo, "Wednesday", "PartTime", "D4§13:00§17:00");
 
-            kindergarten.addValueRoster(year, i, "Thursday", "Early", "F3");
-            kindergarten.addValueRoster(year, i, "Thursday", "Early", "F4");
-            kindergarten.addValueRoster(year, i, "Thursday", "Late", "F5");
-            kindergarten.addValueRoster(year, i, "Thursday", "Late", "F6");
-            kindergarten.addValueRoster(year, i, "Thursday", "PartTime", "D3§10:00§12:30");
-            kindergarten.addValueRoster(year, i, "Thursday", "PartTime", "D4§13:00§17:00");
+            kindergarten.addValueRoster(year, weekNo, "Thursday", "Early", "F3");
+            kindergarten.addValueRoster(year, weekNo, "Thursday", "Early", "F4");
+            kindergarten.addValueRoster(year, weekNo, "Thursday", "Late", "F5");
+            kindergarten.addValueRoster(year, weekNo, "Thursday", "Late", "F6");
+            kindergarten.addValueRoster(year, weekNo, "Thursday", "PartTime", "D3§10:00§12:30");
+            kindergarten.addValueRoster(year, weekNo, "Thursday", "PartTime", "D4§13:00§17:00");
 
-            kindergarten.addValueRoster(year, i, "Friday", "Early", "F5");
-            kindergarten.addValueRoster(year, i, "Friday", "Early", "F6");
-            kindergarten.addValueRoster(year, i, "Friday", "Late", "F5");
-            kindergarten.addValueRoster(year, i, "Friday", "Late", "F6");
-            kindergarten.addValueRoster(year, i, "Friday", "PartTime", "D1§10:00§12:30");
-            kindergarten.addValueRoster(year, i, "Friday", "PartTime", "D3§13:00§17:00");
+            kindergarten.addValueRoster(year, weekNo, "Friday", "Early", "F5");
+            kindergarten.addValueRoster(year, weekNo, "Friday", "Early", "F6");
+            kindergarten.addValueRoster(year, weekNo, "Friday", "Late", "F5");
+            kindergarten.addValueRoster(year, weekNo, "Friday", "Late", "F6");
+            kindergarten.addValueRoster(year, weekNo, "Friday", "PartTime", "D1§10:00§12:30");
+            kindergarten.addValueRoster(year, weekNo, "Friday", "PartTime", "D3§13:00§17:00");
         }
 
     }
