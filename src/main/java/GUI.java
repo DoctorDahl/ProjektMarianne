@@ -350,10 +350,17 @@ public class GUI {
     }
 
     public void getAllChildren(){
-        /*for(int i = 0; i< kindergarten.children.size(); i++){
-            System.out.println(kindergarten.children.get(i).toString());
-        } */
+        String childInfo;
+        for(Child child : kindergarten.getChildren()) {
+            childInfo = child.getSocialSecNo() + ", " + child.getF_name() + " " + child.getL_name();
+            System.out.println(childInfo);
 
+            /*
+            Erstat evt ovenstående println med:
+                System.out.println(fillLine(childInfo));
+            For "pæn" formatering :-)
+             */
+        }
     }
 
     public void switchDefault(){

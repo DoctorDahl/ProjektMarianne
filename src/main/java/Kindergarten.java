@@ -7,7 +7,7 @@ import java.util.List;
 public class Kindergarten {
 
     private CSV_Handler csv_Handler;
-    public List<Child> children;
+    private List<Child> children;
     private List<Employee> employees;
     private List<Roster> rosters;
     //private Map<String,String> logins;
