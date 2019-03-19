@@ -8,9 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
+//import java.util.HashMap;
 
 public class CSV_Handler {
 
@@ -62,9 +62,11 @@ public class CSV_Handler {
         List<Roster> rosters = new ArrayList<>();
         File rosterFolder = new File("src/main/resources/Vagtplaner/");
         File[] listOfRosters = rosterFolder.listFiles();
-        for(File file : listOfRosters) {
-            List<String[]> rosterArray = readCSV(file.toPath());
-            rosters.add(new Roster(rosterArray));
+        if(listOfRosters != null) {
+            for (File file : listOfRosters) {
+                List<String[]> rosterArray = readCSV(file.toPath());
+                rosters.add(new Roster(rosterArray));
+            }
         }
         return rosters;
     }
@@ -88,13 +90,6 @@ public class CSV_Handler {
     /************************************
      *  Writing to CSV-formatted files  *
      ************************************/
-
-    public void writeAll(Kindergarten kindergarten) throws IOException {
-        writeChildren(kindergarten);
-        writeEmployees(kindergarten);
-        writeRosters(kindergarten);
-        //writeLogins(kindergarten);
-    }
 
     public void writeChildren(Kindergarten kindergarten) throws IOException {
         Path path = Paths.get("src/main/resources/Børn.csv");

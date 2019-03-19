@@ -85,16 +85,17 @@ public class Kindergarten {
         //TODO - Roster doesn't exist
     }
 
-    public void removeValueRoster(String year, int weekNo, String day, String shift, String value) {
+    public void removeValueRoster(String year, int weekNo, String day, String shift, String value) throws IOException{
         for(Roster roster : rosters) {
             if(roster.getYear().equals(year)) {
                 String currentShift = roster.getShift(weekNo, day, shift);
                 if(currentShift.contains(","+value)) {
-                    currentShift.replace(","+value,"");
+                    currentShift = currentShift.replace(","+value,"");
                 } else {
-                    currentShift.replace(value+",","");
+                    currentShift = currentShift.replace(value+",","");
                 }
-
+                roster.setShift(weekNo, day, shift, currentShift);
+                csv_Handler.writeRosters(this);
             }
         }
         //TODO - Roster doesn't exist
