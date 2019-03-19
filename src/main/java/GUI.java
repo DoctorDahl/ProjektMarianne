@@ -151,6 +151,8 @@ public class GUI {
 
         System.out.println(screen);
     }
+
+    // TODO - implementer b - q - m
     public  void managerAccessMenu() {
         String screen = headerBlock
                 + fillLine("Tast \"1\" for at få tilgang til Børne menuen.")
@@ -166,24 +168,27 @@ public class GUI {
 
         int choice = Main.keyInput.nextInt();
         switch(choice){
-            case 1: // børnemenu
+            case 1:
+                childrenMenu();
                 break;
-            case 2: // medarbejdermenu
+            case 2:
+                employeeMenu();
                 break;
-            case 3: // roster
+            case 3: // TODO - roster
                 break;
-            case 4: // liste over børn
+            case 4:
+                System.out.println(kindergarten.getChildren());
                 break;
-            case 5: // liste over medarbejdere
+            case 5:
+                System.out.println(kindergarten.getEmployees());
                 break;
-            case 6: // se vagtplan
-                default: Main.keyInput.nextLine(); // clear the wrong input before trying again
-                    System.out.println("Wrong input");
+            case 6: // TODO - se vagtplan
+                default: switchDefault();
                     break;
         }
 
     }
-
+    // TODO - implementer b - q - m
     public void staffAccessMenu(){
         String screen = headerBlock
                 + fillLine("Tast \"1\" for at se en liste over alle børn.")
@@ -197,20 +202,88 @@ public class GUI {
         int choice = Main.keyInput.nextInt();
         switch (choice){
             case 1:
+                System.out.println(kindergarten.getChildren()); // TODO - søg specifikt barn
                 break;
-            case 2: // liste over alle medarbejere
+            case 2:
+                System.out.println(kindergarten.getEmployees()); // TODO - søg specifik medarbejder
                 break;
-            case 3: // se din vagtplan;
+            case 3: // TODO - se din vagtplan
                 break;
-                default: Main.keyInput.nextLine(); // clear the wrong input before trying again
-                    System.out.println("Wrong input");
+                default: switchDefault();
+                    break;
+        }
+    }
+    // TODO - implementer b - q - m
+    public void childrenMenu(){
+        String screen = headerBlock
+                +fillLine("Tast \"1\" for at oprette et nyt barn.")
+                +fillLine("Tast \"2\" for at fjerne et barn.")
+                + fillLine()
+                + endLine
+                + bottom;
+        System.out.println(screen);
+        int choice = Main.keyInput.nextInt();
+        switch (choice){
+            case 1: // TODO - opret barn
+                break;
+            case 2: // TODO fjern barn
+                default: switchDefault();
                     break;
         }
     }
 
-    // lav "børnemenu"
+    // TODO - implementer b - q - m
+    public void employeeMenu(){
+        String screen = headerBlock
+                +fillLine("Tast \"1\" for at oprette en ny medarbejder.")
+                +fillLine("Tast \"2\" for at fjerne en medarbejder. ")
+                + fillLine()
+                + endLine
+                + bottom;
+        System.out.println(screen);
+        int choice = Main.keyInput.nextInt();
+        switch (choice){
+            case 1: // TODO - opret medarbejder
+                break;
+            case 2: // TODO fjern medarbejder
+            default: switchDefault();
+                break;
+        }
+    }
+
+    public void addChild(){
+
+        System.out.println("indtast følgende data: \n");
+        System.out.println("Barnets cpr nr:");
+        String socialSecNo = Main.keyInput.nextLine();
+        System.out.println("Barnets fornavn:");
+        String firstName = Main.keyInput.nextLine();
+        System.out.println("Barnets efternavn:");
+        String lastName = Main.keyInput.nextLine();
+        System.out.println("Barnets specielle behov:");
+        String specialConditions = Main.keyInput.nextLine();
+        System.out.println("Barnets addresse: ");
+        String address = Main.keyInput.nextLine();
+        System.out.println("Første værges navn:");
+        String parent1Name = Main.keyInput.nextLine();
+        System.out.println("Første værges telefon nr:");
+        String parent1Phone = Main.keyInput.nextLine();
+        System.out.println("Første værges adresse:");
+        String parent1Address = Main.keyInput.nextLine();
+        System.out.println("Anden værges navn:");
+        String parent2Name = Main.keyInput.nextLine();
+        System.out.println("Anden værges telefon nr: ");
+        String parent2Phone = Main.keyInput.nextLine();
+        System.out.println("Anden værges adresse: ");
+        String parent2Address = Main.keyInput.nextLine();
 
 
+    }
+
+    public void switchDefault(){
+        Main.keyInput.nextLine(); // clear the wrong input before trying again
+        System.out.println("Wrong input");
+    }
 
 
 }
