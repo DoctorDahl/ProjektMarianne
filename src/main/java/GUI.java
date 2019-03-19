@@ -169,25 +169,30 @@ public class GUI {
                 + bottom;
         System.out.println(screen);
 
-        int choice = Main.keyInput.nextInt();
+        String choice = scanner.next();
+        scanner.nextLine();
         switch(choice){
-            case 1:
+            case "1":
                 childrenMenu();
                 break;
-            case 2:
+            case "2":
                 employeeMenu();
                 break;
-            case 3: // TODO - rostermenu
+            case "3":
+                // TODO - rostermenu
                 break;
-            case 4:
+            case "4":
                 getAllChildren(); // -  søg specifikt barn
                 break;
-            case 5:
+            case "5":
                 // TODO - PRINT ALLE MEDARBEJDERE -  søg specifik medarbejder
                 break;
-            case 6: // TODO - se vagtplan
-                default: switchDefault();
-                    break;
+            case "6":
+                // TODO - se vagtplan
+                break;
+            default:
+                switchDefault();
+                break;
         }
 
     }
@@ -203,7 +208,7 @@ public class GUI {
                 + bottom;
         System.out.println(screen);
 
-        String choice = Main.keyInput.nextLine();
+        String choice = scanner.nextLine();
         switch (choice){
             case "1":
                 // TODO - PRINT ALLE BØRN -  søg specifikt barn
@@ -227,13 +232,17 @@ public class GUI {
                 + endLine
                 + bottom;
         System.out.println(screen);
-        int choice = Main.keyInput.nextInt();
+        String choice = scanner.next();
+        scanner.nextLine();
         switch (choice){
-            case 1: addChildDisplay();
+            case "1":
+                addChildDisplay();
                 break;
-            case 2: deleteChild();
-                default: switchDefault();
-                    break;
+            case "2":
+                deleteChild();
+                break;
+            default:
+                switchDefault();
         }
     }
 
@@ -246,21 +255,66 @@ public class GUI {
                 + endLine
                 + bottom;
         System.out.println(screen);
-        int choice = Main.keyInput.nextInt();
+        String choice = scanner.next();
+        scanner.nextLine();
         switch (choice){
-            case 1: addEmployeeDisplay();
+            case "1":
+                addEmployeeDisplay();
                 break;
-            case 2: deleteEmployee();
-            default: switchDefault();
+            case "2":
+                deleteEmployee();
                 break;
+            default:
+                switchDefault();
         }
     }
 
     public void addChildDisplay() {
 
+        String[] prompts = new String[] {
+                "Barnets cpr nr:",
+                "Barnets fornavn:",
+                "Barnets efternavn:",
+                "Barnets specielle behov:",
+                "Barnets addresse:",
+                "Første værges fulde navn:",
+                "Første værges telefon nr:",
+                "Første værges adresse:",
+                "Anden værges fulde navn:",
+                "Anden værges telefon nr:",
+                "Anden værges adresse:"
+        };
+        String[] childInfo = new String[11];
+
+        String screen;
+        for(int i = 0; i < childInfo.length; i++) {
+            screen = headerBlock
+                    +fillLine(prompts[i])
+                    +bottom;
+            System.out.println(screen);
+            childInfo[i] = scanner.nextLine();
+        }
+
+        try{
+            kindergarten.enrollChild(childInfo);
+            screen = headerBlock
+                    +fillLine(childInfo[1] + " er oprettet i systemet.")
+                    +bottom;
+            System.out.println(screen);
+            scanner.nextLine();
+        } catch(IOException e) {
+            screen = headerBlock
+                    +fillLine("Der opstod en fejl. Prøv igen.")
+                    +bottom;
+            System.out.println(screen);
+            scanner.nextLine();
+        }
+
+
+        /*
         System.out.println("indtast følgende data: \n");
         System.out.println("Barnets cpr nr:");
-        Main.keyInput.nextLine();
+        //Main.keyInput.nextLine(); <-- Den er nu håndteret i childrenMenu()
         String socialSecNo = Main.keyInput.nextLine();
         System.out.println("Barnets fornavn:");
         String firstName = Main.keyInput.nextLine();
@@ -280,8 +334,9 @@ public class GUI {
         String parent2Name = Main.keyInput.nextLine();
         System.out.println("Anden værges telefon nr: ");
         String parent2Phone = Main.keyInput.nextLine();
-        System.out.println("Anden værges adresse: ");
+        System.out.println("Anden værges adresse:");
         String parent2Address = Main.keyInput.nextLine();
+
 
         try{
         kindergarten.enrollChild(new String[]{
@@ -293,24 +348,25 @@ public class GUI {
             System.out.println("Failed adding child");
             e.printStackTrace();
         }
+        */
     }
 
     public void addEmployeeDisplay() {
 
         System.out.println("Indtast følgende data: \n");
         System.out.println("Medarbejderens rolle\n Manager eller partTimeEmployee ?");
-        Main.keyInput.nextLine();
-        String type = Main.keyInput.nextLine();
+        //scanner.nextLine();
+        String type = scanner.nextLine();
         System.out.println("Medarbejderens ID nummber: ");
-        String idNo = Main.keyInput.nextLine();
+        String idNo = scanner.nextLine();
         System.out.println("Medarbejderen fornavn: ");
-        String f_name = Main.keyInput.nextLine();
+        String f_name = scanner.nextLine();
         System.out.println("Medarbejderen efternavn: ");
-        String l_name = Main.keyInput.nextLine();
+        String l_name = scanner.nextLine();
         System.out.println("Telefon nummer: ");
-        String phoneNo = Main.keyInput.nextLine();
+        String phoneNo = scanner.nextLine();
         System.out.println("Adresse: ");
-        String address = Main.keyInput.nextLine();
+        String address = scanner.nextLine();
 
         try{
         kindergarten.addEmployee((new String[]{
@@ -325,8 +381,8 @@ public class GUI {
 
     public void deleteChild() {
         System.out.println("Indtast CPR nr på ønsket barn: ");
-        Main.keyInput.nextLine();
-        String socialSecNo = Main.keyInput.nextLine();
+        //scanner.nextLine();
+        String socialSecNo = scanner.nextLine();
         try{
         kindergarten.disenrollChild(socialSecNo);
             System.out.println("barn fjernet");
@@ -338,8 +394,8 @@ public class GUI {
 
     public void deleteEmployee(){
         System.out.println("Indtast idNo på ønsket medarbejder: ");
-        Main.keyInput.nextLine();
-        String idNo = Main.keyInput.nextLine();
+        //scanner.nextLine();
+        String idNo = scanner.nextLine();
         try{
             kindergarten.removeEmployee(idNo);
             System.out.println("Medarbejder fjernet");
@@ -364,7 +420,7 @@ public class GUI {
     }
 
     public void switchDefault(){
-        Main.keyInput.nextLine(); // clear the wrong input before trying again
+        scanner.nextLine(); // clear the wrong input before trying again
         System.out.println("Wrong input");
     }
 
