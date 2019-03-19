@@ -6,7 +6,6 @@ import java.util.Map;
 public class Roster {
 
     private List<String[]> roster;
-    private String year;
     private static final Map<String,Integer> DAY_TO_INT = new HashMap<>();
     private static final Map<String,Integer> SHIFT_TO_INT = new HashMap<>();
 
@@ -26,7 +25,6 @@ public class Roster {
     public Roster(String year) {
 
         roster = new ArrayList<>();
-        this.year = year;
 
         //First row contains only the year;
         roster.add(new String[] {""+year});
@@ -43,15 +41,15 @@ public class Roster {
     }
 
     public List<String[]> getWeekRoster(int weekNo) {
-        List<String[]> rosterWeek = new ArrayList<>();
+        List<String[]> weekRoster = new ArrayList<>();
 
         int startingRow = 3*(weekNo-1)+1;
 
-        rosterWeek.add(roster.get(startingRow));
-        rosterWeek.add(roster.get(startingRow+1));
-        rosterWeek.add(roster.get(startingRow+2));
+        weekRoster.add(roster.get(startingRow));
+        weekRoster.add(roster.get(startingRow+1));
+        weekRoster.add(roster.get(startingRow+2));
 
-        return rosterWeek;
+        return weekRoster;
     }
 
     public String getShift(int weekNo, String day, String shift) {
@@ -59,22 +57,21 @@ public class Roster {
         int column = DAY_TO_INT.get(day);
         int row = SHIFT_TO_INT.get(shift);
 
-        String shiftString = roster.get(startingRow+row)[column];
-        return shiftString;//.split(",");
+        return roster.get(startingRow+row)[column];
     }
 
-    public void setShift(int weekNo, String day, String shift) {
+    public void setShift(int weekNo, String day, String shift, String value) {
         int startingRow = 3*(weekNo-1)+1;
         int column = DAY_TO_INT.get(day);
         int row = SHIFT_TO_INT.get(shift);
 
         String[] relevantRow = roster.get(startingRow+row);
-        relevantRow[column] = shift;
+        relevantRow[column] = value;
 
         roster.set(startingRow+row,relevantRow);
     }
 
 
     public List<String[]> getRoster() { return roster; }
-    public String getYear() { return year; }
+    public String getYear() { return roster.get(0)[0]; }
 }

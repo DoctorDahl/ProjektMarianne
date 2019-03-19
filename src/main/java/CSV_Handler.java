@@ -54,27 +54,13 @@ public class CSV_Handler {
         if(Files.exists(path)) {
             List<String[]> employeeArray = readCSV(path);
             for (String[] a : employeeArray) {
-                Employee employee;
-                switch (a[0]) {
-                    case "Manager":
-                        employee = new Manager(a[0], a[1], a[2], a[3], a[4]);
-                        break;
-                    case "FullTimeEmployee":
-                        employee = new FullTimeEmployee(a[0], a[1], a[2], a[3], a[4]);
-                        break;
-                    case "PartTimeEmployee":
-                        employee = new PartTimeEmployee(a[0], a[1], a[2], a[3], a[4], Float.parseFloat(a[5]));
-                        break;
-                    default:
-                        throw new IOException("Wrong format for Medarbejdere.csv");
-                }
-                employees.add(employee);
+                employees.add(new Employee(a));
             }
         }
         return employees;
     }
 
-    public List<Roster> readRosters() throws IOException { //TODO - Test that this actually works...
+    public List<Roster> readRosters() throws IOException {
         List<Roster> rosters = new ArrayList<>();
         File rosterFolder = new File("src/main/resources/Vagtplaner/");
         File[] listOfRosters = rosterFolder.listFiles();
@@ -85,6 +71,7 @@ public class CSV_Handler {
         return rosters;
     }
 
+    /*
     public Map<String,String> readLogins() throws IOException {
         Map<String,String> logins = new HashMap<>();
         Path path = Paths.get("src/main/resources/Logins.csv");
@@ -96,7 +83,7 @@ public class CSV_Handler {
         }
         return logins;
     }
-
+    */
 
 
 
@@ -108,7 +95,7 @@ public class CSV_Handler {
         writeChildren(kindergarten);
         writeEmployees(kindergarten);
         writeRosters(kindergarten);
-        writeLogins(kindergarten);
+        //writeLogins(kindergarten);
     }
 
     public void writeChildren(Kindergarten kindergarten) throws IOException {
@@ -139,6 +126,7 @@ public class CSV_Handler {
         }
     }
 
+    /*
     public void writeLogins(Kindergarten kindergarten) throws IOException {
         Path path = Paths.get("src/main/resources/Logins.csv");
         List<String[]> loginArray = new ArrayList<>();
@@ -149,5 +137,6 @@ public class CSV_Handler {
         }
         writeCSV(loginArray, path);
     }
+    */
 
 }
