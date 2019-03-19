@@ -183,7 +183,7 @@ public class GUI {
                 getAllChildren(); // TODO -  søg specifikt barn
                 break;
             case 5:
-                // TODO - PRINT ALLE MEDARBEJDERE -  søg specifik medarbejder
+                getAllEmployees();// TODO -  søg specifik medarbejder
                 break;
             case 6: // TODO - se vagtplan
                 default: switchDefault();
@@ -206,10 +206,10 @@ public class GUI {
         String choice = Main.keyInput.nextLine();
         switch (choice){
             case "1":
-                // TODO - PRINT ALLE BØRN -  søg specifikt barn
+                getAllChildren();// TODO  -  søg specifikt barn
                 break;
             case "2":
-                 // TODO - PRINT ALLE MEDARBEJDERE -  søg specifik medarbejder
+                getAllEmployees(); // TODO  -  søg specifik medarbejder
                 break;
             case "3": // TODO - se din vagtplan
                 break;
@@ -254,6 +254,12 @@ public class GUI {
             default: switchDefault();
                 break;
         }
+    }
+
+    public void rosterMenu(){
+        String screen = headerBlock
+                +fillLine("Tast \"1\" for at oprette en ny medarbejder.")
+                +fillLine("Tast \"2\" for at fjerne en vagtplan")
     }
 
     public void addChildDisplay() {
@@ -357,10 +363,20 @@ public class GUI {
         }
     }
 
+    public void getAllEmployees(){
+        String employeeInfo;
+        for (Employee employee : kindergarten.getEmployees()){
+            employeeInfo = employee.getIdNo() + ", " + employee.getF_name() + " " + employee.getL_name();
+            System.out.println(fillLine(employeeInfo));
+        }
+    }
+
     public void switchDefault(){
         Main.keyInput.nextLine(); // clear the wrong input before trying again
         System.out.println("Wrong input");
     }
+
+
 
 /*
     public void ChildrenSearch(){
