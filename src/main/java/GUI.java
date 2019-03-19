@@ -329,4 +329,14 @@ public class GUI {
     }
 
 
+    public void ChildrenSearch(){
+
+        int choice = Main.keyInput.nextInt();
+        int i = 0;
+        while (choice != kindergarten.children[i]) {
+            i++;
+        }
+        //getSpecificChild()
+    }
+
 }
