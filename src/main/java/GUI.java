@@ -176,13 +176,13 @@ public class GUI {
             case 2:
                 employeeMenu();
                 break;
-            case 3: // TODO - roster
+            case 3: // TODO - rostermenu
                 break;
             case 4:
-                System.out.println(kindergarten.getChildren());
+                // TODO - PRINT ALLE BØRN -  søg specifikt barn
                 break;
             case 5:
-                System.out.println(kindergarten.getEmployees());
+                // TODO - PRINT ALLE MEDARBEJDERE -  søg specifik medarbejder
                 break;
             case 6: // TODO - se vagtplan
                 default: switchDefault();
@@ -206,10 +206,10 @@ public class GUI {
         String choice = Main.keyInput.nextLine();
         switch (choice){
             case "1":
-                // TODO - søg specifikt barn
+                // TODO - PRINT ALLE BØRN -  søg specifikt barn
                 break;
             case "2":
-                 // TODO - søg specifik medarbejder
+                 // TODO - PRINT ALLE MEDARBEJDERE -  søg specifik medarbejder
                 break;
             case "3": // TODO - se din vagtplan
                 break;
@@ -227,11 +227,11 @@ public class GUI {
                 + endLine
                 + bottom;
         System.out.println(screen);
-        int choice = Main.keyInput.nextInt();
+        String choice = Main.keyInput.nextLine();
         switch (choice){
-            case 1: addChildDisplay();
+            case "1": addChildDisplay();
                 break;
-            case 2: // TODO fjern barn
+            case "2": // TODO fjern barn
                 default: switchDefault();
                     break;
         }
@@ -246,11 +246,11 @@ public class GUI {
                 + endLine
                 + bottom;
         System.out.println(screen);
-        int choice = Main.keyInput.nextInt();
+        String choice = Main.keyInput.nextLine();
         switch (choice){
-            case 1: addEmployeeDisplay();
+            case "1": addEmployeeDisplay();
                 break;
-            case 2: // TODO fjern medarbejder
+            case "2": // TODO fjern medarbejder
             default: switchDefault();
                 break;
         }
