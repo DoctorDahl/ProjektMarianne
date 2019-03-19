@@ -115,10 +115,10 @@ public class GUI {
 
             switch (result) {
                 case "1":
-                    //result = overMarianneFlow();
+                   managerAccessMenu();
                     break;
                 case "2":
-                    //result = almMarianneFlow();
+                    staffAccessMenu();
                     break;
             }
         } while (!result.equals("Q"));
@@ -151,5 +151,66 @@ public class GUI {
 
         System.out.println(screen);
     }
+    public  void managerAccessMenu() {
+        String screen = headerBlock
+                + fillLine("Tast \"1\" for at få tilgang til Børne menuen.")
+                + fillLine("Tast \"2\" for at få tilgang til medarbejder menuen.")
+                + fillLine("Tast \"3\" for at få tilgang til vagtplan menuen.")
+                + fillLine("Tast \"4\" for at se en liste over alle børn")
+                + fillLine("Tast \"5\" for at se en liste over alle medarbejdere")
+                + fillLine("Tast \"6\" for at se en vagtplanen")
+                + fillLine()
+                + endLine
+                + bottom;
+        System.out.println(screen);
+
+        int choice = Main.keyInput.nextInt();
+        switch(choice){
+            case 1: // børnemenu
+                break;
+            case 2: // medarbejdermenu
+                break;
+            case 3: // roster
+                break;
+            case 4: // liste over børn
+                break;
+            case 5: // liste over medarbejdere
+                break;
+            case 6: // se vagtplan
+                default: Main.keyInput.nextLine(); // clear the wrong input before trying again
+                    System.out.println("Wrong input");
+                    break;
+        }
+
+    }
+
+    public void staffAccessMenu(){
+        String screen = headerBlock
+                + fillLine("Tast \"1\" for at se en liste over alle børn.")
+                + fillLine("Tast \"2\" for at se en liste over alle medarbejdere.")
+                + fillLine("Tast \"3\" for at se en din vagtplan.")
+                + fillLine()
+                + endLine
+                + bottom;
+        System.out.println(screen);
+
+        int choice = Main.keyInput.nextInt();
+        switch (choice){
+            case 1:
+                break;
+            case 2: // liste over alle medarbejere
+                break;
+            case 3: // se din vagtplan;
+                break;
+                default: Main.keyInput.nextLine(); // clear the wrong input before trying again
+                    System.out.println("Wrong input");
+                    break;
+        }
+    }
+
+    // lav "børnemenu"
+
+
+
 
 }

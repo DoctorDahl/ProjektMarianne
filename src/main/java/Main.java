@@ -1,6 +1,8 @@
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
+    public static Scanner keyInput = new Scanner(System.in);
 
     public static void main(String[] args) {
 
@@ -13,5 +15,4 @@ public class Main {
         new GUI(kindergarten, "Roskilde Frie Børnehave");
 
     }
-
 }
