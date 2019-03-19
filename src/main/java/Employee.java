@@ -32,7 +32,7 @@ public class Employee {
 
     public String[] getAllInfo() {
         String[] employeeInfo = new String[6];
-        employeeInfo[0] = getType();
+        employeeInfo[0] = type;
         employeeInfo[1] = idNo;
         employeeInfo[2] = f_name;
         employeeInfo[3] = l_name;

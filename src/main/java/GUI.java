@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -319,20 +318,13 @@ public class GUI {
             childInfo[i] = scanner.nextLine();
         }
 
-        try {
-            kindergarten.enrollChild(childInfo);
-            screen = headerBlock
-                    + fillLine(childInfo[1] + " er oprettet i systemet.")
-                    + bottom;
-            System.out.println(screen);
-            scanner.nextLine();
-        } catch (IOException e) {
-            screen = headerBlock
-                    + fillLine("Der opstod en fejl. Prøv igen.")
-                    + bottom;
-            System.out.println(screen);
-            scanner.nextLine();
-        }
+        kindergarten.enrollChild(childInfo);
+        screen = headerBlock
+                + fillLine(childInfo[1] + " er oprettet i systemet.")
+                + bottom;
+        System.out.println(screen);
+        scanner.nextLine();
+
 
     }
 
@@ -366,45 +358,32 @@ public class GUI {
             employeeInfo = Arrays.copyOf(employeeInfo,6);
         }
 
-        try {
-            kindergarten.addEmployee(employeeInfo);
-            screen = headerBlock
-                    + fillLine(employeeInfo[2] + " er oprettet i systemet.")
-                    + bottom;
-            System.out.println(screen);
-            scanner.nextLine();
-        } catch (IOException e) {
-            screen = headerBlock
-                    + fillLine("Der opstod en fejl. Prøv igen.")
-                    + bottom;
-            System.out.println(screen);
-            scanner.nextLine();
-        }
+        kindergarten.addEmployee(employeeInfo);
+        screen = headerBlock
+                + fillLine(employeeInfo[2] + " er oprettet i systemet.")
+                + bottom;
+        System.out.println(screen);
+        scanner.nextLine();
 
     }
 
     private void deleteChild() {
+
         String screen = headerBlock
                 + fillLine("Indtast CPR nr på barn der ønskes fjernet:")
                 + bottom;
         System.out.println(screen);
 
         String socialSecNo = scanner.nextLine();
-        try {
-            //TODO - Check at barn eksisterer. (Ikke vigtigt)
-            kindergarten.disenrollChild(socialSecNo);
-            screen = headerBlock
-                    + fillLine("Barn fjernet fra systemet.")
-                    + bottom;
-            System.out.println(screen);
-            scanner.nextLine();
-        } catch (IOException e) {
-            screen = headerBlock
-                    + fillLine("Der opstod en fejl. Prøv igen.")
-                    + bottom;
-            System.out.println(screen);
-            scanner.nextLine();
-        }
+
+        //TODO - Check at barn eksisterer. (Ikke vigtigt)
+        kindergarten.disenrollChild(socialSecNo);
+        screen = headerBlock
+                + fillLine("Barn fjernet fra systemet.")
+                + bottom;
+        System.out.println(screen);
+        scanner.nextLine();
+
     }
 
     private void deleteEmployee() {
@@ -414,21 +393,15 @@ public class GUI {
         System.out.println(screen);
 
         String idNo = scanner.nextLine();
-        try {
-            //TODO - Check at medarbejder eksisterer. (Ikke vigtigt)
-            kindergarten.removeEmployee(idNo);
-            screen = headerBlock
-                    + fillLine("Medarbejder fjernet fra systemet.")
-                    + bottom;
-            System.out.println(screen);
-            scanner.nextLine();
-        } catch (IOException e) {
-            screen = headerBlock
-                    + fillLine("Der opstod en fejl. Prøv igen.")
-                    + bottom;
-            System.out.println(screen);
-            scanner.nextLine();
-        }
+
+        //TODO - Check at medarbejder eksisterer. (Ikke vigtigt)
+        kindergarten.removeEmployee(idNo);
+        screen = headerBlock
+                + fillLine("Medarbejder fjernet fra systemet.")
+                + bottom;
+        System.out.println(screen);
+        scanner.nextLine();
+
     }
 
     private void getAllChildren() {
