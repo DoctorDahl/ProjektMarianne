@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -110,7 +111,7 @@ public class GUI {
      *
      ******************************************************************************************************************/
 
-    private void mainFlow() throws IOException {
+    private void mainFlow() throws IOException{
         String result;
         do{
             result = mainGUI();
@@ -179,7 +180,7 @@ public class GUI {
             case 3: // TODO - rostermenu
                 break;
             case 4:
-                // TODO - PRINT ALLE BØRN -  søg specifikt barn
+                getAllChildren(); // -  søg specifikt barn
                 break;
             case 5:
                 // TODO - PRINT ALLE MEDARBEJDERE -  søg specifik medarbejder
@@ -191,9 +192,8 @@ public class GUI {
 
     }
     // TODO - implementer b - q - m
-    public void staffAccessMenu(){
-        String result = Main.keyInput.nextLine();
-        do{
+    public void staffAccessMenu() throws IOException{
+
         String screen = headerBlock
                 + fillLine("Tast \"1\" for at se en liste over alle børn.")
                 + fillLine("Tast \"2\" for at se en liste over alle medarbejdere.")
@@ -216,7 +216,7 @@ public class GUI {
                 default: switchDefault();
                     break;
         }
-        } while(!result.equalsIgnoreCase("q"));
+
     }
     // TODO - implementer b - q - m
     public void childrenMenu() {
@@ -227,11 +227,11 @@ public class GUI {
                 + endLine
                 + bottom;
         System.out.println(screen);
-        String choice = Main.keyInput.nextLine();
+        int choice = Main.keyInput.nextInt();
         switch (choice){
-            case "1": addChildDisplay();
+            case 1: addChildDisplay();
                 break;
-            case "2": // TODO fjern barn
+            case 2: deleteChild();
                 default: switchDefault();
                     break;
         }
@@ -246,11 +246,11 @@ public class GUI {
                 + endLine
                 + bottom;
         System.out.println(screen);
-        String choice = Main.keyInput.nextLine();
+        int choice = Main.keyInput.nextInt();
         switch (choice){
-            case "1": addEmployeeDisplay();
+            case 1: addEmployeeDisplay();
                 break;
-            case "2": // TODO fjern medarbejder
+            case 2: deleteEmployee();
             default: switchDefault();
                 break;
         }
@@ -298,7 +298,8 @@ public class GUI {
     public void addEmployeeDisplay() {
 
         System.out.println("Indtast følgende data: \n");
-        System.out.println("Medarbejderens rolle\n Tast 0 for Manager\n Tast 1 for pædagog");
+        System.out.println("Medarbejderens rolle\n Manager eller partTimeEmployee ?");
+        Main.keyInput.nextLine();
         String type = Main.keyInput.nextLine();
         System.out.println("Medarbejderens ID nummber: ");
         String idNo = Main.keyInput.nextLine();
@@ -310,11 +311,10 @@ public class GUI {
         String phoneNo = Main.keyInput.nextLine();
         System.out.println("Adresse: ");
         String address = Main.keyInput.nextLine();
-        System.out.println("Medarbejderen ønsket antal ugentlige timer: ");
-        String numWorkHours = Main.keyInput.nextLine();
+
         try{
         kindergarten.addEmployee((new String[]{
-                type, f_name, l_name, phoneNo, address, numWorkHours
+                type, f_name, l_name, phoneNo, address
         }));
             System.out.println(f_name + " Er oprettet i systemet");
         }catch(Exception e){
@@ -323,12 +323,45 @@ public class GUI {
         }
     }
 
+    public void deleteChild() {
+        System.out.println("Indtast CPR nr på ønsket barn: ");
+        Main.keyInput.nextLine();
+        String socialSecNo = Main.keyInput.nextLine();
+        try{
+        kindergarten.disenrollChild(socialSecNo);
+            System.out.println("barn fjernet");
+        }catch(Exception e){
+            System.out.println("Failed deleting child");
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteEmployee(){
+        System.out.println("Indtast idNo på ønsket medarbejder: ");
+        Main.keyInput.nextLine();
+        String idNo = Main.keyInput.nextLine();
+        try{
+            kindergarten.removeEmployee(idNo);
+            System.out.println("Medarbejder fjernet");
+        }catch(Exception e){
+            System.out.println("Failed deleting staff");
+            e.printStackTrace();
+        }
+    }
+
+    public void getAllChildren(){
+        /*for(int i = 0; i< kindergarten.children.size(); i++){
+            System.out.println(kindergarten.children.get(i).toString());
+        } */
+
+    }
+
     public void switchDefault(){
         Main.keyInput.nextLine(); // clear the wrong input before trying again
         System.out.println("Wrong input");
     }
 
-
+/*
     public void ChildrenSearch(){
 
         int choice = Main.keyInput.nextInt();
@@ -336,7 +369,5 @@ public class GUI {
         while (choice != kindergarten.children[i]) {
             i++;
         }
-        //getSpecificChild()
-    }
-
+    }*/
 }
