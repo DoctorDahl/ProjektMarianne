@@ -362,13 +362,14 @@ public class GUI {
         System.out.println("Wrong input");
     }
 
-/*
+
     public void ChildrenSearch(){
 
-        int choice = Main.keyInput.nextInt();
+         choice = sc. nextLine()
         int i = 0;
         while (choice != kindergarten.children[i]) {
             i++;
         }
-    }*/
+
+    }
 }
