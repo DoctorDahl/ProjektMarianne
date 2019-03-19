@@ -1,8 +1,8 @@
-public abstract class Employee {
+public class Employee {
 
     protected static final float FULLTIMEHOURS = 37.0f;
 
-    private String type;
+    private String type; //Should be enum
     private final String idNo;
     private String f_name;
     private String l_name;
@@ -10,18 +10,26 @@ public abstract class Employee {
     private String address;
     private float numWorkHours;
 
-    protected Employee(String type, String idNo, String f_name, String l_name, String phoneNo, String address, float numWorkHours){
-        //TODO - Why do we have subclasses? They serve zero purpose as of now.
-        //TODO - Maybe enum for EmployeeTypes?
-        //TODO - Check for existing idNo, and throw Exception if found?
-        this.type = type;
-        this.idNo = idNo;
-        this.f_name = f_name;
-        this.l_name = l_name;
-        this.phoneNo = phoneNo;
-        this.address = address;
-        this.numWorkHours = numWorkHours;
-    };
+    public Employee(String[] employeeInfo) {
+
+        if(employeeInfo.length != 6 && employeeInfo.length != 7) {
+            throw new IllegalArgumentException("String array employeeInfo must be of length 6 or 7.");
+        }
+
+        this.type = employeeInfo[0];
+        this.idNo = employeeInfo[1];
+        this.f_name = employeeInfo[2];
+        this.l_name = employeeInfo[3];
+        this.phoneNo = employeeInfo[4];
+        this.address = employeeInfo[5];
+
+        if(employeeInfo.length == 7) {
+            this.numWorkHours = Float.parseFloat(employeeInfo[6]);
+        } else {
+            this.numWorkHours = FULLTIMEHOURS;
+        }
+
+    }
 
     public String[] getAllInfo() {
         String[] employeeInfo = new String[6];

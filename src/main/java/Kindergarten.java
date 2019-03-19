@@ -1,6 +1,8 @@
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
 
 public class Kindergarten {
 
@@ -8,14 +10,14 @@ public class Kindergarten {
     private List<Child> children;
     private List<Employee> employees;
     private List<Roster> rosters;
-    private Map<String,String> logins;
+    //private Map<String,String> logins;
 
     public Kindergarten() throws IOException {
         csv_Handler = new CSV_Handler();
         this.children = csv_Handler.readChildren();
         this.employees = csv_Handler.readEmployees();
         this.rosters = csv_Handler.readRosters();
-        this.logins = csv_Handler.readLogins();
+        //this.logins = csv_Handler.readLogins();
     }
 
     public void enrollChild(String[] childInfo) throws IOException {
@@ -35,16 +37,36 @@ public class Kindergarten {
     }
 
 
-    //TODO - Implement the following methods
+    public void addEmployee(String[] employeeInfo) throws IOException {
+        Employee employee = new Employee(employeeInfo);
+        employees.add(employee);
+        csv_Handler.writeEmployees(this);
+    }
 
-    //addManager
-    //addFullTimeEmployee
-    //addPartTimeEmployee
-    //removeEmployee
+    public void removeEmployee(String idNo) throws IOException {
+        for(Employee employee : employees) {
+            if(employee.getIdNo().equals(idNo)) {
+                employees.remove(employee);
+                break;
+            }
+        }
+        csv_Handler.writeEmployees(this);
+    }
 
     public void createNewRoster(String year) throws IOException {
         //TODO - Check if year exists?
         Roster roster = new Roster(year);
+        csv_Handler.writeRosters(this);
+    }
+
+    public void removeRoster(String year) throws IOException {
+        for(Roster roster : rosters) {
+            if(roster.getYear().equals(year)) {
+                rosters.remove(roster);
+                break;
+            }
+        }
+        Files.deleteIfExists(Paths.get("src/main/resources/Vagtplaner/År"+ year +".csv"));
         csv_Handler.writeRosters(this);
     }
 
@@ -53,24 +75,14 @@ public class Kindergarten {
             if(roster.getYear().equals(year)) {
                 String currentShift = roster.getShift(weekNo, day, shift);
                 currentShift += ","+value;
-            } else {
-                //TODO - Roster doesn't exist
             }
         }
+        //TODO - Roster doesn't exist
     }
 
     public void removeValueRoster(String year, int weekNo, String day, String shift, String value) {
         for(Roster roster : rosters) {
             if(roster.getYear().equals(year)) {
-                /*
-                String[] currentShift = roster.getShift(weekNo, day, shift);
-
-                for(String empID : currentShift) {
-                    if(empID.equals(value)) {
-                        ...
-                    }
-                }
-                */
                 String currentShift = roster.getShift(weekNo, day, shift);
                 if(currentShift.contains(","+value)) {
                     currentShift.replace(","+value,"");
@@ -78,18 +90,19 @@ public class Kindergarten {
                     currentShift.replace(value+",","");
                 }
 
-            } else {
-                //TODO - Roster doesn't exist
             }
         }
+        //TODO - Roster doesn't exist
     }
 
-    public void updateRoster(String year) throws IOException {
+    public List<String[]> getWeekRoster(String year, int weekNo) {
         for(Roster roster : rosters) {
             if(roster.getYear().equals(year)) {
-
+                return roster.getWeekRoster(weekNo);
             }
         }
+        //TODO - Roster doesn't exist
+        return null;
     }
 
     //createNewLogin
@@ -103,6 +116,6 @@ public class Kindergarten {
     public List<Child> getChildren() { return children; }
     public List<Employee> getEmployees() { return employees; }
     public List<Roster> getRosters() { return rosters; }
-    public Map<String, String> getLogins() { return logins; }
+    //public Map<String, String> getLogins() { return logins; }
 
 }
