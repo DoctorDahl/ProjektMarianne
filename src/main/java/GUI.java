@@ -173,18 +173,16 @@ public class GUI {
                 employeeMenu();
                 break;
             case "3":
-                // TODO - rostermenu
+                rosterMenu();
                 break;
             case "4":
                 getAllChildren();
-                // -  søg specifikt barn
-                break;
+            break;
             case "5":
                 getAllEmployees();
-                // TODO -  søg specifik medarbejder
                 break;
             case "6":
-                // TODO - se vagtplan
+                seeRoster();
                 break;
             default:
                 switchDefault();
@@ -208,10 +206,10 @@ public class GUI {
         String choice = scanner.nextLine();
         switch (choice) {
             case "1":
-                getAllChildren();// TODO  -  søg specifikt barn
+                getAllChildren();
                 break;
             case "2":
-                getAllEmployees(); // TODO  -  søg specifik medarbejder
+                getAllEmployees();
                 break;
             case "3": // TODO - se din vagtplan
                 break;
@@ -410,6 +408,22 @@ public class GUI {
             childInfo = child.getSocialSecNo() + ", " + child.getF_name() + " " + child.getL_name();
             System.out.println(fillLine(childInfo));
         }
+        searchChildren();
+    }
+    public void searchChildren() {
+        String searchWord;
+
+        System.out.println(fillLine("Ønsker du at søge information på et barn?")
+                +fillLine("Indtast CPR nummer: "));
+        searchWord = scanner.nextLine();
+        for(Child child : kindergarten.getChildren()){
+            if(child.getSocialSecNo().equals(searchWord)){
+                System.out.println(fillLine(child.getSocialSecNo() + ", " + child.getF_name() + " " + child.getL_name() + ", " + child.getAddress())
+                + fillLine("Værge information: " + child.getParent1Name() + ", " + child.getParent1Address() + ", " + child.getParent1Phone())
+                + fillLine("Værge  information: " + child.getParent2Name() + ", " + child.getParent2Address() + ", " + child.getParent2Phone()));
+            }
+        }
+
     }
 
     private void getAllEmployees() {
@@ -417,6 +431,21 @@ public class GUI {
         for (Employee employee : kindergarten.getEmployees()) {
             employeeInfo = employee.getIdNo() + ", " + employee.getF_name() + " " + employee.getL_name();
             System.out.println(fillLine(employeeInfo));
+        }
+        searchEmployees();
+    }
+
+    public void searchEmployees(){
+        String searchWord;
+        System.out.println(fillLine("Ønsker du at søge information på en bestemt ansat?")
+        + fillLine("Indtast ID: "));
+        searchWord = scanner.nextLine();
+        for (Employee employee: kindergarten.getEmployees()) {
+            if (employee.getIdNo().equals(searchWord)){
+                System.out.println(fillLine(employee.getIdNo() + ", " + employee.getF_name() + " " + employee.getL_name())
+                +fillLine(employee.getAddress()+ ", " + employee.getPhoneNo())
+                +fillLine(employee.getType() + ", " + employee.getNumWorkHours()));
+            }
         }
     }
 
@@ -434,15 +463,5 @@ public class GUI {
         System.out.println("Wrong input");
     }
 
-    /*
-    public void ChildrenSearch(){
 
-         choice = sc. nextLine()
-        int i = 0;
-        while (choice != kindergarten.children[i]) {
-            i++;
-        }
-
-    }
-    */
 }
