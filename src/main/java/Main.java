@@ -1,24 +1,15 @@
-import java.io.IOException;
-import java.util.Scanner;
-
 public class Main {
-    public static Scanner keyInput = new Scanner(System.in);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
 
-        Kindergarten kindergarten = null;
-        try {
-            kindergarten = new Kindergarten();
-            //generateTestData(kindergarten);
-        } catch (IOException e) {
-            //TODO - Handle dat shit.
-            e.printStackTrace();
-        }
+        Kindergarten kindergarten = new Kindergarten();
+        //generateTestData(kindergarten);
         new GUI(kindergarten, "Roskilde Frie Børnehave");
 
     }
 
-    public static void generateTestData(Kindergarten kindergarten) throws IOException{
+    /*
+    public static void generateTestData(Kindergarten kindergarten) {
 
         kindergarten.enrollChild(new String[] {"000000-0000","Anne","Annesen","ADHD","Annevej 1, 4000 Roskilde","Anja Annesen","20000000","Annevej 1, 4000 Roskilde","Arne Annesen","22000000","Annevej 1, 4000 Roskilde"});
         kindergarten.enrollChild(new String[] {"000000-0001","Bo","Bosen","Bangebuks.","Bovej 1, 4000 Roskilde","Bolette Bosen","20000001","Bovej 1, 4000 Roskilde","Børge Bosen","22000001","Bovej 1, 4000 Roskilde"});
@@ -85,5 +76,6 @@ public class Main {
         }
 
     }
+    */
 
 }

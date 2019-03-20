@@ -8,9 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
+//import java.util.HashMap;
 
 public class CSV_Handler {
 
@@ -34,49 +34,67 @@ public class CSV_Handler {
      *  Reading from CSV-formatted files  *
      **************************************/
 
-    public List<Child> readChildren() throws IOException {
+    public List<Child> readChildren() {
         List<Child> children = new ArrayList<>();
         Path path = Paths.get("src/main/resources/Børn.csv");
         if(Files.exists(path)) {
-            List<String[]> childArray = readCSV(path);
-            for (String[] a : childArray) {
-                children.add(new Child(a));
+            try {
+                List<String[]> childArray = readCSV(path);
+                for (String[] a : childArray) {
+                    children.add(new Child(a));
+                }
+            } catch (IOException e) {
+                System.out.println("Trouble reading Børn.csv");
             }
         }
         return children;
     }
 
-    public List<Employee> readEmployees() throws IOException {
+    public List<Employee> readEmployees(){
         List<Employee> employees = new ArrayList<>();
         Path path = Paths.get("src/main/resources/Medarbejdere.csv");
         if(Files.exists(path)) {
-            List<String[]> employeeArray = readCSV(path);
-            for (String[] a : employeeArray) {
-                employees.add(new Employee(a));
+            try {
+                List<String[]> employeeArray = readCSV(path);
+                for (String[] a : employeeArray) {
+                    employees.add(new Employee(a));
+                }
+            } catch (IOException e) {
+                System.out.println("Trouble reading Medarbejdere.csv");
             }
         }
         return employees;
     }
 
-    public List<Roster> readRosters() throws IOException {
+    public List<Roster> readRosters() {
         List<Roster> rosters = new ArrayList<>();
         File rosterFolder = new File("src/main/resources/Vagtplaner/");
         File[] listOfRosters = rosterFolder.listFiles();
-        for(File file : listOfRosters) {
-            List<String[]> rosterArray = readCSV(file.toPath());
-            rosters.add(new Roster(rosterArray));
+        if(listOfRosters != null) {
+            try {
+                for (File file : listOfRosters) {
+                    List<String[]> rosterArray = readCSV(file.toPath());
+                    rosters.add(new Roster(rosterArray));
+                }
+            } catch (IOException e) {
+                System.out.println("Trouble reading roster .csv-files");
+            }
         }
         return rosters;
     }
 
     /*
-    public Map<String,String> readLogins() throws IOException {
+    public Map<String,String> readLogins() {
         Map<String,String> logins = new HashMap<>();
         Path path = Paths.get("src/main/resources/Logins.csv");
         if(Files.exists(path)) {
-            List<String[]> loginArray = readCSV(path);
-            for (String[] login : loginArray) {
-                logins.put(login[0], login[1]);
+            try {
+                List<String[]> loginArray = readCSV(path);
+                for (String[] login : loginArray) {
+                    logins.put(login[0], login[1]);
+                }
+            } catch (IOException e) {
+                System.out.println("Trouble reading Logins.csv");
             }
         }
         return logins;
@@ -89,46 +107,51 @@ public class CSV_Handler {
      *  Writing to CSV-formatted files  *
      ************************************/
 
-    public void writeAll(Kindergarten kindergarten) throws IOException {
-        writeChildren(kindergarten);
-        writeEmployees(kindergarten);
-        writeRosters(kindergarten);
-        //writeLogins(kindergarten);
-    }
-
-    public void writeChildren(Kindergarten kindergarten) throws IOException {
+    public void writeChildren(Kindergarten kindergarten) {
         Path path = Paths.get("src/main/resources/Børn.csv");
         List<String[]> childArray = new ArrayList<>();
         for(Child child : kindergarten.getChildren()) {
             childArray.add(child.getAllInfo());
         }
-        Files.deleteIfExists(path);
-        writeCSV(childArray, path);
+        try {
+            Files.deleteIfExists(path);
+            writeCSV(childArray, path);
+        } catch (IOException e) {
+            System.out.println("Trouble writing to Børn.csv");
+        }
     }
 
-    public void writeEmployees(Kindergarten kindergarten) throws IOException {
+    public void writeEmployees(Kindergarten kindergarten) {
         Path path = Paths.get("src/main/resources/Medarbejdere.csv");
         List<String[]> employeeArray = new ArrayList<>();
         for(Employee employee : kindergarten.getEmployees()) {
             employeeArray.add(employee.getAllInfo());
         }
-        Files.deleteIfExists(path);
-        writeCSV(employeeArray, path);
+        try {
+            Files.deleteIfExists(path);
+            writeCSV(employeeArray, path);
+        } catch (IOException e) {
+            System.out.println("Trouble writing to Medarbejdere.csv");
+        }
     }
 
-    public void writeRosters(Kindergarten kindergarten) throws IOException {
+    public void writeRosters(Kindergarten kindergarten) {
         Path path;
         List<String[]> rosterArray;
         for(Roster roster : kindergarten.getRosters()) {
             rosterArray = roster.getRoster();
             path = Paths.get("src/main/resources/Vagtplaner/År" + rosterArray.get(0)[0] + ".csv");
-            Files.deleteIfExists(path);
-            writeCSV(rosterArray, path);
+            try {
+                Files.deleteIfExists(path);
+                writeCSV(rosterArray, path);
+            } catch (IOException e) {
+                System.out.println("Trouble writing roster .csv files");
+            }
         }
     }
 
     /*
-    public void writeLogins(Kindergarten kindergarten) throws IOException {
+    public void writeLogins(Kindergarten kindergarten) {
         Path path = Paths.get("src/main/resources/Logins.csv");
         List<String[]> loginArray = new ArrayList<>();
 
@@ -136,7 +159,12 @@ public class CSV_Handler {
             String[] login = {entry.getKey(),entry.getValue()};
             loginArray.add(login);
         }
-        writeCSV(loginArray, path);
+        try {
+            Files.deleteIfExists(path);
+            writeCSV(loginArray, path);
+        } catch (IOException e) {
+            System.out.println("Trouble writing to Logins.csv");
+        }
     }
     */
 

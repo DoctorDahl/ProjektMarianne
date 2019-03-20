@@ -9,7 +9,7 @@ public class Roster {
     private static final Map<String,Integer> DAY_TO_INT = new HashMap<>();
     private static final Map<String,Integer> SHIFT_TO_INT = new HashMap<>();
 
-    {
+    static {
         DAY_TO_INT.put("Monday",0);
         DAY_TO_INT.put("Tuesday",1);
         DAY_TO_INT.put("Wednesday",2);

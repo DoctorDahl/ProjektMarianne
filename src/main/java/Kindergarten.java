@@ -12,7 +12,7 @@ public class Kindergarten {
     private List<Roster> rosters;
     //private Map<String,String> logins;
 
-    public Kindergarten() throws IOException {
+    public Kindergarten() {
         csv_Handler = new CSV_Handler();
         this.children = csv_Handler.readChildren();
         this.employees = csv_Handler.readEmployees();
@@ -20,13 +20,13 @@ public class Kindergarten {
         //this.logins = csv_Handler.readLogins();
     }
 
-    public void enrollChild(String[] childInfo) throws IOException {
+    public void enrollChild(String[] childInfo) {
         Child child = new Child(childInfo);
         children.add(child);
         csv_Handler.writeChildren(this);
     }
 
-    public void disenrollChild(String socialSecNo) throws IOException {
+    public void disenrollChild(String socialSecNo) {
         for(Child child : children) {
             if(child.getSocialSecNo().equals(socialSecNo)) {
                 children.remove(child);
@@ -37,13 +37,13 @@ public class Kindergarten {
     }
 
 
-    public void addEmployee(String[] employeeInfo) throws IOException {
+    public void addEmployee(String[] employeeInfo) {
         Employee employee = new Employee(employeeInfo);
         employees.add(employee);
         csv_Handler.writeEmployees(this);
     }
 
-    public void removeEmployee(String idNo) throws IOException {
+    public void removeEmployee(String idNo) {
         for(Employee employee : employees) {
             if(employee.getIdNo().equals(idNo)) {
                 employees.remove(employee);
@@ -53,24 +53,28 @@ public class Kindergarten {
         csv_Handler.writeEmployees(this);
     }
 
-    public void createNewRoster(String year) throws IOException {
+    public void createNewRoster(String year) {
         //TODO - Check if year exists?
         Roster roster = new Roster(year);
         rosters.add(roster);
         csv_Handler.writeRosters(this);
     }
 
-    public void removeRoster(String year) throws IOException {
+    public void removeRoster(String year) {
         for(Roster roster : rosters) {
             if(roster.getYear().equals(year)) {
                 rosters.remove(roster);
                 break;
             }
         }
-        Files.deleteIfExists(Paths.get("src/main/resources/Vagtplaner/År"+ year +".csv"));
+        try {
+            Files.deleteIfExists(Paths.get("src/main/resources/Vagtplaner/År" + year + ".csv"));
+        } catch (IOException e) {
+            System.out.println("Trouble deleting roster file");
+        }
     }
 
-    public void addValueRoster(String year, int weekNo, String day, String shift, String value) throws IOException{
+    public void addValueRoster(String year, int weekNo, String day, String shift, String value) {
         for(Roster roster : rosters) {
             if(roster.getYear().equals(year)) {
                 String currentShift = roster.getShift(weekNo, day, shift);
@@ -90,11 +94,12 @@ public class Kindergarten {
             if(roster.getYear().equals(year)) {
                 String currentShift = roster.getShift(weekNo, day, shift);
                 if(currentShift.contains(","+value)) {
-                    currentShift.replace(","+value,"");
+                    currentShift = currentShift.replace(","+value,"");
                 } else {
-                    currentShift.replace(value+",","");
+                    currentShift = currentShift.replace(value+",","");
                 }
-
+                roster.setShift(weekNo, day, shift, currentShift);
+                csv_Handler.writeRosters(this);
             }
         }
         //TODO - Roster doesn't exist
