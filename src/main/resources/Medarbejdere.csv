@@ -1,4 +1,4 @@
-"Manager","L","Marianne","Ledersen","00000000","Mariannegade 0, 0.mf, 4000 Roskilde"
+"Manager","L0","Marianne","Ledersen","00000000","Mariannegade 0, 0.mf, 4000 Roskilde"
 "FullTimeEmployee","F1","Marianne","Fuldtidsen1","10000001","Mariannegade 11, 1.mf, 4000 Roskilde"
 "FullTimeEmployee","F2","Marianne","Fuldtidsen2","10000002","Mariannegade 12, 2.mf, 4000 Roskilde"
 "FullTimeEmployee","F3","Marianne","Fuldtidsen3","10000003","Mariannegade 13, 3.mf, 4000 Roskilde"
@@ -9,4 +9,3 @@
 "PartTimeEmployee","D2","Marianne","Deltidsen2","20000002","Mariannegade 22, 2.mf, 4000 Roskilde"
 "PartTimeEmployee","D3","Marianne","Deltidsen3","20000003","Mariannegade 23, 3.mf, 4000 Roskilde"
 "PartTimeEmployee","D4","Marianne","Deltidsen4","20000004","Mariannegade 24, 4.mf, 4000 Roskilde"
-"","","","","",""

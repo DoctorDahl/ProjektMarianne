@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class GUI {
@@ -184,7 +186,7 @@ public class GUI {
                 // TODO -  søg specifik medarbejder
                 break;
             case "6":
-                // TODO - se vagtplan
+                seeRoster();
                 break;
             default:
                 switchDefault();
@@ -214,6 +216,7 @@ public class GUI {
                 getAllEmployees(); // TODO  -  søg specifik medarbejder
                 break;
             case "3": // TODO - se din vagtplan
+                seeRoster();
                 break;
             default:
                 switchDefault();
@@ -287,6 +290,7 @@ public class GUI {
             case "3":
                 break;
             case "4":
+                seeRoster();
                 break;
                 default: switchDefault();
         }
@@ -422,11 +426,75 @@ public class GUI {
 
     private void seeRoster() {
         String screen = headerBlock
+                + fillLine("Indtast årstal for ønsket vagtplan:")
+                + bottom;
+        System.out.println(screen);
+
+        String year = scanner.nextLine();
+        //TODO - Handle non-int input
+
+        screen = headerBlock
                 + fillLine("Indtast uge nr:")
                 + bottom;
+        System.out.println(screen);
 
         String weekNo = scanner.nextLine();
-        //TODO - Handle non-int
+        //TODO - Handle non-int input
+
+        System.out.println(stringyfyWeekRoster(kindergarten.getWeekRoster(year,Integer.parseInt(weekNo)),weekNo));
+        scanner.nextLine();
+    }
+
+    private String stringyfyWeekRoster(List<String[]> weekRoster, String weekNo) {
+
+        List<List<String>> earlyShifts = new ArrayList<>();
+        List<List<String>> lateShifts = new ArrayList<>();
+        List<List<String>> partTime = new ArrayList<>();
+
+        for(int i = 0; i < weekRoster.get(0).length; i++) {
+            earlyShifts.add(Arrays.asList(weekRoster.get(0)[i].split(",")));
+            lateShifts.add(Arrays.asList(weekRoster.get(1)[i].split(",")));
+            partTime.add(Arrays.asList(weekRoster.get(2)[i].split(",")));
+        }
+
+        List<List<List<String>>> fuck = new ArrayList<>();
+
+        for(int i = 0; i < partTime.size(); i++) {
+            List<List<String>> dailyInfo = new ArrayList<>();
+            for(int j = 0; j < partTime.get(i).size(); j++) {
+                List<String> empInfo = Arrays.asList(partTime.get(i).get(j).split("§"));
+                dailyInfo.add(empInfo);
+            }
+            fuck.add(dailyInfo);
+        }
+
+        if(weekNo.length() == 1) {
+            weekNo += " ";
+        }
+        String rosterString =
+                fillLine("+--------+--------+--------+--------+--------+--------+\n",LINE_WIDTH, 8)
+                +fillLine("| Uge " + weekNo + " |  Man   |  Tirs  |  Ons   |  Tors  |  Fre   |",LINE_WIDTH,8)
+                +fillLine("+--------+--------+--------+--------+--------+--------+\n",LINE_WIDTH, 8)
+                +fillLine("|  Åbner |  " + "");
+
+/*              "+--------+--------+--------+--------+--------+--------+"
+                "| Uge 14 |  Man   |  Tirs  |  Ons   |  Tors  |  Fre   |"
+                "+--------+--------------------------------------------+"
+                "|  Åbner |  M1    |  M1    |  M1    |  M1    |  M1    |"
+                "|        |  M2    |  M2    |  M2    |  M2    |  M2    |"
+                "+--------+--------------------------------------------+"
+                "| Lukker |  M1    |  M1    |  M1    |  M1    |  M1    |"
+                "|        |  M2    |  M2    |  M2    |  M2    |  M2    |"
+                "+--------+--------------------------------------------+"
+                "| Deltid | D1     | D1     | D1     | D1     | D1     |"
+                "|        |  10:00 |  10:00 |  10:00 |  10:00 |  10:00 |"
+                "|        |  12:30 |  12:30 |  12:30 |  12:30 |  12:30 |"
+                "|        | D2     | D2     | D2     | D2     | D2     |"
+                "|        |  10:00 |  10:00 |  10:00 |  10:00 |  10:00 |"
+                "|        |  12:30 |  12:30 |  12:30 |  12:30 |  12:30 |"
+                "+--------+--------+--------+--------+--------+--------+"
+*/
+        return null;
     }
 
     private void switchDefault() {

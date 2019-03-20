@@ -1,10 +1,40 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args){
 
         Kindergarten kindergarten = new Kindergarten();
         //generateTestData(kindergarten);
-        new GUI(kindergarten, "Roskilde Frie Børnehave");
+        //new GUI(kindergarten, "Roskilde Frie Børnehave");
+        debug(kindergarten);
+
+    }
+
+    private static void debug(Kindergarten kindergarten) {
+        List<String[]> weekRoster = kindergarten.getWeekRoster("2019",1);
+        
+        List<List<String>> partTime = new ArrayList<>();
+
+        for(int i = 0; i < weekRoster.get(0).length; i++) {
+            partTime.add(Arrays.asList(weekRoster.get(2)[i].split(",")));
+        }
+
+
+        List<List<List<String>>> partTimeWithShiftTimes = new ArrayList<>();
+
+        for(int i = 0; i < partTime.size(); i++) {
+            List<List<String>> dailyInfo = new ArrayList<>();
+            for(int j = 0; j < partTime.get(i).size(); j++) {
+                List<String> empInfo = Arrays.asList(partTime.get(i).get(j).split("§"));
+                dailyInfo.add(empInfo);
+            }
+            partTimeWithShiftTimes.add(dailyInfo);
+        }
+
+        System.out.println(partTimeWithShiftTimes);
 
     }
 
