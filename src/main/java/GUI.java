@@ -331,7 +331,7 @@ public class GUI {
     private void addEmployeeDisplay() {
 
         String[] prompts = new String[]{
-                "Medarbejderens rolle: \"Manager\",\"FullTimeEmployee\" eller \"PartTimeEmployee\"",
+                "\"Manager\",\"FullTimeEmployee\" eller \"PartTimeEmployee\"?",
                 "Medarbejderens ID nummer:",
                 "Medarbejderen fornavn:",
                 "Medarbejderen efternavn:",
@@ -418,6 +418,15 @@ public class GUI {
             employeeInfo = employee.getIdNo() + ", " + employee.getF_name() + " " + employee.getL_name();
             System.out.println(fillLine(employeeInfo));
         }
+    }
+
+    private void seeRoster() {
+        String screen = headerBlock
+                + fillLine("Indtast uge nr:")
+                + bottom;
+
+        String weekNo = scanner.nextLine();
+        //TODO - Handle non-int
     }
 
     private void switchDefault() {
