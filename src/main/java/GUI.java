@@ -14,19 +14,17 @@ public class GUI {
     private static final String line = "+-------------------------------------------------------------------------------------------------------------------------------------------";
 
     private String headerBlock;
-    private static String backLine = fillLine()
-            + fillLine("Tast \"B\" for at gå tilbage.");
-
-    private static String endLine = fillLine("Tast \"Q\" for at afslutte.");
-
-    private static String mainLine = fillLine("Tast \"M\" for at gå til  hovedmenu.");
+    //private static String backLine = fillLine()
+    //        + fillLine("Tast \"B\" for at gå tilbage.");
+    //private static String endLine = fillLine("Tast \"Q\" for at afslutte.");
+    //private static String mainLine = fillLine("Tast \"M\" for at gå til  hovedmenu.");
 
     private static String bottom = fillLine()
             + fillLine("Godkend med \"Enter\"")
             + fillLine()
             + horisontalLine();
 
-    public static String footerBlock = backLine + mainLine + endLine + bottom;
+    //public static String footerBlock = backLine + mainLine + endLine + bottom;
 
     private static String horisontalLine(int length) {
         return line.substring(0, length - 1) + "+\n";
@@ -65,47 +63,14 @@ public class GUI {
         mainFlow();
     }
 
-//    /**
-//     * Examine if a string is "M" or "Q"
-//     *
-//     * @param string the string to examine
-//     * @return true if string is "M" or "Q"
-//     */
-//    private static boolean isMQ(String string) {
-//        switch (string.toUpperCase()) {
-//            case "M":
-//            case "Q":
-//                return true;
-//        }
-//        return false;
-//    }
-//
-//    /**
-//     * Examine if a string is "B", "M" or "Q"
-//     *
-//     * @param string the string to examine
-//     * @return true is string is "B", "M" or "Q"
-//     */
-//    private static boolean isBMQ(String string) {
-//        switch (string.toUpperCase()) {
-//            case "B":
-//            case "M":
-//            case "Q":
-//                return true;
-//        }
-//        return false;
-//    }
 
-
-    /******************************************************************************************************************
+    /*********************************************
      *
-     *      Flow-, GUI- and Display-methods
+     *      Methods for GUI-flow are below.
      *
-     *      "Flow" methods handle which direction to take through the program.
-     *      "GUI" methods handle the inputs from the user.
-     *      "Display" methods handle the look of the GUI.
+     *      <<>> Here be dragons <<>>
      *
-     ******************************************************************************************************************/
+     *********************************************/
 
     private void mainFlow() {
         String result;
@@ -145,13 +110,11 @@ public class GUI {
                 + fillLine("Tast \"1\" hvis du er Over-Marianne.")
                 + fillLine("Tast \"2\" hvis du er Almindelig Marianne.")
                 + fillLine()
-                + endLine
                 + bottom;
 
         System.out.println(screen);
     }
 
-    // TODO - implementer b - q - m
     private void managerAccessMenu() {
         String screen = headerBlock
                 + fillLine("Tast \"1\" for at få tilgang til Børne menuen.")
@@ -161,7 +124,6 @@ public class GUI {
                 + fillLine("Tast \"5\" for at se en liste over alle medarbejdere")
                 + fillLine("Tast \"6\" for at se en vagtplanen")
                 + fillLine()
-                + endLine
                 + bottom;
         System.out.println(screen);
 
@@ -175,15 +137,13 @@ public class GUI {
                 employeeMenu();
                 break;
             case "3":
-                // TODO - rostermenu
+                rosterMenu();
                 break;
             case "4":
                 getAllChildren();
-                // -  søg specifikt barn
                 break;
             case "5":
                 getAllEmployees();
-                // TODO -  søg specifik medarbejder
                 break;
             case "6":
                 seeRoster();
@@ -195,7 +155,6 @@ public class GUI {
 
     }
 
-    // TODO - implementer b - q - m
     private void staffAccessMenu() {
 
         String screen = headerBlock
@@ -203,19 +162,18 @@ public class GUI {
                 + fillLine("Tast \"2\" for at se en liste over alle medarbejdere.")
                 + fillLine("Tast \"3\" for at se en din vagtplan.")
                 + fillLine()
-                + endLine
                 + bottom;
         System.out.println(screen);
 
         String choice = scanner.nextLine();
         switch (choice) {
             case "1":
-                getAllChildren();// TODO  -  søg specifikt barn
+                getAllChildren();
                 break;
             case "2":
-                getAllEmployees(); // TODO  -  søg specifik medarbejder
+                getAllEmployees();
                 break;
-            case "3": // TODO - se din vagtplan
+            case "3":
                 seeRoster();
                 break;
             default:
@@ -225,13 +183,11 @@ public class GUI {
 
     }
 
-    // TODO - implementer b - q - m
     private void childrenMenu() {
         String screen = headerBlock
                 + fillLine("Tast \"1\" for at oprette et nyt barn.")
                 + fillLine("Tast \"2\" for at fjerne et barn.")
                 + fillLine()
-                + endLine
                 + bottom;
         System.out.println(screen);
         String choice = scanner.next();
@@ -248,13 +204,11 @@ public class GUI {
         }
     }
 
-    // TODO - implementer b - q - m
     private void employeeMenu() {
         String screen = headerBlock
                 + fillLine("Tast \"1\" for at oprette en ny medarbejder.")
                 + fillLine("Tast \"2\" for at fjerne en medarbejder. ")
                 + fillLine()
-                + endLine
                 + bottom;
         System.out.println(screen);
         String choice = scanner.next();
@@ -278,7 +232,6 @@ public class GUI {
                 + fillLine("Tast \"3\" for at opdatere en vagtplan")
                 + fillLine("Tast \"4\" for at se vagtplan")
                 + fillLine()
-                + endLine
                 + bottom;
         System.out.println(screen);
         String choice = scanner.nextLine();
@@ -380,7 +333,6 @@ public class GUI {
 
         String socialSecNo = scanner.nextLine();
 
-        //TODO - Check at barn eksisterer. (Ikke vigtigt)
         kindergarten.disenrollChild(socialSecNo);
         screen = headerBlock
                 + fillLine("Barn fjernet fra systemet.")
@@ -398,7 +350,6 @@ public class GUI {
 
         String idNo = scanner.nextLine();
 
-        //TODO - Check at medarbejder eksisterer. (Ikke vigtigt)
         kindergarten.removeEmployee(idNo);
         screen = headerBlock
                 + fillLine("Medarbejder fjernet fra systemet.")
@@ -431,7 +382,6 @@ public class GUI {
         System.out.println(screen);
 
         String year = scanner.nextLine();
-        //TODO - Handle non-int input
 
         screen = headerBlock
                 + fillLine("Indtast uge nr:")
@@ -439,9 +389,12 @@ public class GUI {
         System.out.println(screen);
 
         String weekNo = scanner.nextLine();
-        //TODO - Handle non-int input
 
-        System.out.println(stringyfyWeekRoster(kindergarten.getWeekRoster(year,Integer.parseInt(weekNo)),weekNo));
+        screen = headerBlock
+                + fillLine("Ugeplan for uge " + weekNo + " år " + year)
+                + stringyfyWeekRoster(kindergarten.getWeekRoster(year,Integer.parseInt(weekNo)),weekNo)
+                + bottom;
+        System.out.println(screen);
         scanner.nextLine();
     }
 
@@ -459,42 +412,126 @@ public class GUI {
 
         List<List<List<String>>> fuck = new ArrayList<>();
 
-        for(int i = 0; i < partTime.size(); i++) {
+        for (List<String> day : partTime) {
             List<List<String>> dailyInfo = new ArrayList<>();
-            for(int j = 0; j < partTime.get(i).size(); j++) {
-                List<String> empInfo = Arrays.asList(partTime.get(i).get(j).split("§"));
+            for (String employee : day) {
+                List<String> empInfo = Arrays.asList(employee.split("§"));
                 dailyInfo.add(empInfo);
             }
             fuck.add(dailyInfo);
         }
 
+
+        int earlyLines = 0;
+        int lateLines = 0;
+        int partTimeLines = 0;
+
+        for(List list : earlyShifts) {
+            if(list.size() > earlyLines) {
+                earlyLines = list.size();
+            }
+        }
+        for(List list : lateShifts) {
+            if(list.size() > lateLines) {
+                lateLines = list.size();
+            }
+        }
+        for(List list : partTime) {
+            if(list.size() > partTimeLines) {
+                partTimeLines = list.size();
+            }
+        }
+
+
         if(weekNo.length() == 1) {
             weekNo += " ";
         }
-        String rosterString =
-                fillLine("+--------+--------+--------+--------+--------+--------+\n",LINE_WIDTH, 8)
-                +fillLine("| Uge " + weekNo + " |  Man   |  Tirs  |  Ons   |  Tors  |  Fre   |",LINE_WIDTH,8)
-                +fillLine("+--------+--------+--------+--------+--------+--------+\n",LINE_WIDTH, 8)
-                +fillLine("|  Åbner |  " + "");
+        StringBuilder rosterSB =
+                new StringBuilder(fillLine("+--------+--------+--------+--------+--------+--------+", LINE_WIDTH, 8)
+                        + fillLine("| Uge " + weekNo + " |  Man   |  Tirs  |  Ons   |  Tors  |  Fre   |", LINE_WIDTH, 8)
+                        + fillLine("+--------+--------+--------+--------+--------+--------+", LINE_WIDTH, 8)
+                        + fillLine("|  Åbner |  "
+                        + idNoOrSpace(earlyShifts.get(0).get(0)) + "    |  "
+                        + idNoOrSpace(earlyShifts.get(1).get(0)) + "    |  "
+                        + idNoOrSpace(earlyShifts.get(2).get(0)) + "    |  "
+                        + idNoOrSpace(earlyShifts.get(3).get(0)) + "    |  "
+                        + idNoOrSpace(earlyShifts.get(4).get(0)) + "    |", LINE_WIDTH, 8
+                ));
 
-/*              "+--------+--------+--------+--------+--------+--------+"
-                "| Uge 14 |  Man   |  Tirs  |  Ons   |  Tors  |  Fre   |"
-                "+--------+--------------------------------------------+"
-                "|  Åbner |  M1    |  M1    |  M1    |  M1    |  M1    |"
-                "|        |  M2    |  M2    |  M2    |  M2    |  M2    |"
-                "+--------+--------------------------------------------+"
-                "| Lukker |  M1    |  M1    |  M1    |  M1    |  M1    |"
-                "|        |  M2    |  M2    |  M2    |  M2    |  M2    |"
-                "+--------+--------------------------------------------+"
-                "| Deltid | D1     | D1     | D1     | D1     | D1     |"
-                "|        |  10:00 |  10:00 |  10:00 |  10:00 |  10:00 |"
-                "|        |  12:30 |  12:30 |  12:30 |  12:30 |  12:30 |"
-                "|        | D2     | D2     | D2     | D2     | D2     |"
-                "|        |  10:00 |  10:00 |  10:00 |  10:00 |  10:00 |"
-                "|        |  12:30 |  12:30 |  12:30 |  12:30 |  12:30 |"
-                "+--------+--------+--------+--------+--------+--------+"
-*/
-        return null;
+        if(earlyLines > 1) {
+            for(int i = 1; i < earlyLines; i++) {
+                rosterSB.append(fillLine("|        |  "
+                        + idNoOrSpace(earlyShifts.get(0).get(i)) + "    |  "
+                        + idNoOrSpace(earlyShifts.get(1).get(i)) + "    |  "
+                        + idNoOrSpace(earlyShifts.get(2).get(i)) + "    |  "
+                        + idNoOrSpace(earlyShifts.get(3).get(i)) + "    |  "
+                        + idNoOrSpace(earlyShifts.get(4).get(i)) + "    |", LINE_WIDTH, 8));
+            }
+        }
+
+        rosterSB.append(fillLine("+--------+--------+--------+--------+--------+--------+", LINE_WIDTH, 8)).append(fillLine("| Lukker |  "
+                + idNoOrSpace(lateShifts.get(0).get(0)) + "    |  "
+                + idNoOrSpace(lateShifts.get(1).get(0)) + "    |  "
+                + idNoOrSpace(lateShifts.get(2).get(0)) + "    |  "
+                + idNoOrSpace(lateShifts.get(3).get(0)) + "    |  "
+                + idNoOrSpace(lateShifts.get(4).get(0)) + "    |", LINE_WIDTH, 8));
+
+        if(lateLines > 1) {
+            for(int i = 1; i < lateLines; i++) {
+                rosterSB.append(fillLine("|        |  "
+                        + idNoOrSpace(lateShifts.get(0).get(i)) + "    |  "
+                        + idNoOrSpace(lateShifts.get(1).get(i)) + "    |  "
+                        + idNoOrSpace(lateShifts.get(2).get(i)) + "    |  "
+                        + idNoOrSpace(lateShifts.get(3).get(i)) + "    |  "
+                        + idNoOrSpace(lateShifts.get(4).get(i)) + "    |", LINE_WIDTH, 8));
+            }
+        }
+
+        rosterSB.append(fillLine("+--------+--------+--------+--------+--------+--------+", LINE_WIDTH, 8)).append(fillLine("| Deltid | "
+                + idNoOrSpace(fuck.get(0).get(0).get(0)) + "     | "
+                + idNoOrSpace(fuck.get(1).get(0).get(0)) + "     | "
+                + idNoOrSpace(fuck.get(2).get(0).get(0)) + "     | "
+                + idNoOrSpace(fuck.get(3).get(0).get(0)) + "     | "
+                + idNoOrSpace(fuck.get(4).get(0).get(0)) + "     |", LINE_WIDTH, 8)).append(fillLine("|        |  "
+                + idNoOrSpace(fuck.get(0).get(0).get(1)) + " |  "
+                + idNoOrSpace(fuck.get(1).get(0).get(1)) + " |  "
+                + idNoOrSpace(fuck.get(2).get(0).get(1)) + " |  "
+                + idNoOrSpace(fuck.get(3).get(0).get(1)) + " |  "
+                + idNoOrSpace(fuck.get(4).get(0).get(1)) + " |", LINE_WIDTH, 8)).append(fillLine("|        |  "
+                + idNoOrSpace(fuck.get(0).get(0).get(2)) + " |  "
+                + idNoOrSpace(fuck.get(1).get(0).get(2)) + " |  "
+                + idNoOrSpace(fuck.get(2).get(0).get(2)) + " |  "
+                + idNoOrSpace(fuck.get(3).get(0).get(2)) + " |  "
+                + idNoOrSpace(fuck.get(4).get(0).get(2)) + " |", LINE_WIDTH, 8));
+
+        if(partTimeLines > 1) {
+            for(int i = 1; i < partTimeLines; i++) {
+                rosterSB.append(fillLine("|        | "
+                        + idNoOrSpace(fuck.get(0).get(i).get(0)) + "     | "
+                        + idNoOrSpace(fuck.get(1).get(i).get(0)) + "     | "
+                        + idNoOrSpace(fuck.get(2).get(i).get(0)) + "     | "
+                        + idNoOrSpace(fuck.get(3).get(i).get(0)) + "     | "
+                        + idNoOrSpace(fuck.get(4).get(i).get(0)) + "     |", LINE_WIDTH, 8)).append(fillLine("|        |  "
+                        + idNoOrSpace(fuck.get(0).get(i).get(1)) + " |  "
+                        + idNoOrSpace(fuck.get(1).get(i).get(1)) + " |  "
+                        + idNoOrSpace(fuck.get(2).get(i).get(1)) + " |  "
+                        + idNoOrSpace(fuck.get(3).get(i).get(1)) + " |  "
+                        + idNoOrSpace(fuck.get(4).get(i).get(1)) + " |", LINE_WIDTH, 8)).append(fillLine("|        |  "
+                        + idNoOrSpace(fuck.get(0).get(i).get(2)) + " |  "
+                        + idNoOrSpace(fuck.get(1).get(i).get(2)) + " |  "
+                        + idNoOrSpace(fuck.get(2).get(i).get(2)) + " |  "
+                        + idNoOrSpace(fuck.get(3).get(i).get(2)) + " |  "
+                        + idNoOrSpace(fuck.get(4).get(i).get(2)) + " |", LINE_WIDTH, 8));
+            }
+        }
+        rosterSB.append(fillLine("+--------+--------+--------+--------+--------+--------+", LINE_WIDTH, 8));
+
+        return rosterSB.toString();
+
+    }
+
+    private String idNoOrSpace(String string) {
+        return (string == null) ? "  " : string;
     }
 
     private void switchDefault() {
@@ -502,15 +539,4 @@ public class GUI {
         System.out.println("Wrong input");
     }
 
-    /*
-    public void ChildrenSearch(){
-
-         choice = sc. nextLine()
-        int i = 0;
-        while (choice != kindergarten.children[i]) {
-            i++;
-        }
-
-    }
-    */
 }
